@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Frontend</title>
+</head>
+<body>
+
+<h1 id="output">Loading...</h1>
+
+<script>
+async function loadData() {
+    const response = await fetch("https://localhost:5001/api/message");
+
+    const data = await response.json();
+
+    document.getElementById("output").innerText = data.text;
+}
+
+loadData();
+</script>
+
+</body>
+</html>
