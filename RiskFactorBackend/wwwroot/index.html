@@ -673,6 +673,7 @@
         let timerInterval = null;
         let timerSecondsLeft = 0;
         let timerPaused = false;
+        let transitioning = false;
         const timerWrapper = document.getElementById("timer-wrapper");
         const timerDisplay = document.getElementById("timer-display");
 
@@ -698,6 +699,7 @@
                 timerSecondsLeft--;
                 timerDisplay.innerText = timerSecondsLeft;
                 if (timerSecondsLeft <= 0) {
+                    transitioning = true;
                     stopTimer();
                     showResult("Took Too Much Time!");
                     setTimeout(() => DaySymptoms(1), 1000);
@@ -777,6 +779,7 @@
         dayInfoExit.addEventListener("click", closeDayInfo);
 
         function DaySymptoms(requestedDay) {
+            transitioning = false;
             stopTimer();
             playSound("dayStart");
             updateBestDay(requestedDay);
@@ -829,10 +832,12 @@
         }
 
         function UpdateScore(choice) {
+            if (transitioning) return;
             stopTimer();
             const health = symptoms[PersonNumber][0];
             if (choice === "Home") {
                 if (health === "Unhealthy") {
+                    transitioning = true;
                     playSound("disregard");
                     showResult("Disregarded a Person in Critical Condition!");
                     setTimeout(() => DaySymptoms(1), 1000);
@@ -851,6 +856,7 @@
             dayElement.innerText = `Day ${day}`;
             scoreElement.innerText = `Score: ${score}`;
             if (PersonNumber + 1 >= symptoms.length) {
+                transitioning = true;
                 if (score >= symptoms.length - 3) {
                     showResult("You Saved Everyone!");
                     setTimeout(() => DaySymptoms(day + 1), 1000);

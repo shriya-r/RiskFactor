@@ -73,12 +73,13 @@ public class GenerateDay {
     }
 
     public List<List<String>> Symptoms(int day) {
+        int d = Math.Clamp(day, 1, dayAvails.Keys.Max());
         List<List<String>> people = new();
         int unhealthyCount = _random.Next(PatientsPerDay / 2, (int)(PatientsPerDay * 0.9));
         int healthyCount = PatientsPerDay - unhealthyCount;
         for (int i = 0; i < healthyCount; i++) {
             List<String> info = new() { "Healthy" };
-            List<Symptom> symptoms = _bank.PickSymptoms(PickHealthyScenario(day), dayAvails[day]);
+            List<Symptom> symptoms = _bank.PickSymptoms(PickHealthyScenario(d), dayAvails[d]);
             foreach (var symptom in symptoms) {
                 string dialogue = symptom.DialogueOptions[_random.Next(symptom.DialogueOptions.Length)];
                 info.Add(dialogue);
@@ -99,7 +100,7 @@ public class GenerateDay {
                     sc = Enum.GetValues<Scenario>()[_random.Next(3)];
                     break;
             }
-            List<Symptom> symptoms = _bank.PickSymptoms(sc, dayAvails[day]);
+            List<Symptom> symptoms = _bank.PickSymptoms(sc, dayAvails[d]);
             foreach (var symptom in symptoms) {
                 string dialogue = symptom.DialogueOptions[_random.Next(symptom.DialogueOptions.Length)];
                 info.Add(dialogue);
@@ -142,10 +143,14 @@ public class GenerateDay {
             (SymptomPriority.HighPriority,   "HIGH PRIORITY"),
         };
 
+        int maxDay = dayAvails.Keys.Max();
+        int dc = Math.Clamp(day, 1, maxDay);
+        int prev = Math.Clamp(day - 1, 1, maxDay);
+
         string symptomInfo = "";
         foreach (var (priority, label) in labels) {
-            int from = day > 1 ? dayAvails[day - 1][priority] : 0;
-            int to = dayAvails[day][priority];
+            int from = day > 1 ? dayAvails[prev][priority] : 0;
+            int to = dayAvails[dc][priority];
             if (to <= from) continue;
             var newSymptoms = _bank.GetRange(priority, from, to);
             symptomInfo += $"\nNEW {label} SYMPTOMS:\n";
