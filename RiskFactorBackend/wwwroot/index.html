@@ -11,7 +11,6 @@
             padding: 0;
             box-sizing: border-box;
         }
-
         html,
         body {
             width: 100%;
@@ -19,7 +18,6 @@
             overflow: hidden;
             background: #000;
         }
-
         .frame-1 {
             position: absolute;
             width: 4096px;
@@ -28,7 +26,6 @@
             top: 0;
             left: 0;
         }
-
         .background {
             position: absolute;
             width: 4096px;
@@ -36,7 +33,6 @@
             left: 0px;
             top: 0px;
         }
-
         .tool-box {
             position: absolute;
             width: 1612px;
@@ -44,7 +40,6 @@
             left: 127px;
             top: 1813.5px;
         }
-
         .bad {
             position: absolute;
             width: 213px;
@@ -53,7 +48,6 @@
             top: 1972.5px;
             cursor: pointer;
         }
-
         .good {
             position: absolute;
             width: 216px;
@@ -62,7 +56,6 @@
             top: 1971.5px;
             cursor: pointer;
         }
-
         .patient-file {
             position: absolute;
             width: 457px;
@@ -78,6 +71,17 @@
             height: 258px;
             left: 3188px;
             top: 480.5px;
+        }
+        #score {
+            position: absolute;
+            top: 17%;
+            left: 72%;
+            transform: translate(-50%, -50%);
+            font-size: 25px;
+            font-weight: bold;
+            z-index: 60;
+            color: black;
+            text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.8);
         }
 
         .book-and-plant {
@@ -97,7 +101,6 @@
             display: none;
             z-index: 20;
         }
-
         .exit-symptoms {
             position: absolute;
             width: 173px;
@@ -111,12 +114,10 @@
             background-size: contain;
             background-repeat: no-repeat;
         }
-
         .symptoms.visible,
         .exit-symptoms.visible {
             display: block;
         }
-
         h1,
         h2,
         p {
@@ -131,7 +132,6 @@
         #homeButton {
             background: green;
         }
-
         #hospitalButton {
             background: red;
         }
@@ -149,7 +149,6 @@
             width: 500px;
             pointer-events: none;
         }
-
         #symptom-list li {
             margin-bottom: 5px;
         }
