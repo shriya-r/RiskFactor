@@ -8,7 +8,7 @@ We also wanted to raise awareness about postpartum complications and the challen
 
 Our goal was to create a game that is both educational and engaging — helping players learn warning signs through gameplay instead of simply reading informational material.
 
----
+
 
 # What It Does
 
@@ -35,7 +35,7 @@ The game teaches players to identify:
 * **Medical Risk Factors**
 * **Unrelated Symptoms** meant to distract the player
 
----
+
 
 # Gameplay
 
@@ -52,7 +52,7 @@ Each day:
 
 At the beginning of each day, newly introduced symptoms and categories are explained to the player.
 
----
+
 
 # Win & Loss Conditions
 
@@ -75,7 +75,7 @@ Players lose if:
 
 If too many unnecessary hospital visits occur, the game displays: “Hospital Overcrowded”
 
----
+
 
 # Difficulty Progression
 
@@ -118,7 +118,7 @@ Introduces:
 * Full difficulty gameplay
 * Timer to ensure decisions are made quickly
 
----
+
 
 # Symptoms & Categories
 
@@ -142,7 +142,7 @@ Examples:
 * “I measured my heart rate, and it was 140 bpm.”
 * “I fainted earlier today.”
 
----
+
 
 ## Medium Priority Symptoms
 
@@ -167,7 +167,7 @@ Examples:
 * “Koff-koff! I’ve been coughing for the past few weeks!”
 * “My vision sometimes gets really blurry for a few seconds.”
 
----
+
 
 ## Risk Factors
 
@@ -189,7 +189,7 @@ Examples:
 * “I smoke every so often.”
 * “I haven’t attended a prenatal appointment yet.”
 
----
+
 
 ## Non-Risk Factors
 
@@ -209,7 +209,7 @@ Examples:
 * “I regularly attend my prenatal appointments.”
 * “I don’t smoke or drink.”
 
----
+
 
 ## Unrelated Symptoms
 
@@ -231,7 +231,7 @@ Examples:
 * “I have a tooth ache.”
 * “I got a paper cut.”
 
----
+
 
 # Core Rules
 
@@ -259,7 +259,7 @@ Example:
 * Nausea
 * Weakness
 
----
+
 
 # Procedural Patient Generation
 
@@ -267,12 +267,12 @@ The game uses weighted random generation to create realistic patients.
 
 ## Healthy Patients
 
-Symptoms:
+Randomly Chosen Symptoms:
 
-* 30% chance of Non-Risk Factors
-* 70% chance of Unrelated Symptoms
+* Non-Risk Factors
+* Unrelated Symptoms
 
----
+
 
 ## Unhealthy Patients
 
@@ -291,7 +291,7 @@ Additional symptoms may include:
 * Risk factors
 * Unrelated symptoms
 
----
+
 
 ### Type 2 — Risk Factor + Medium Symptom
 
@@ -306,7 +306,7 @@ Additional symptoms may include:
 * More Risk factors
 * Unrelated symptoms
 
----
+
 
 ### Type 3 — Three Medium Symptoms
 
@@ -318,7 +318,7 @@ Additional symptoms:
 
 * Mostly unrelated or non-risk symptoms
 
----
+
 
 # Technical Details
 
@@ -331,7 +331,7 @@ Additional symptoms:
 * **JavaScript**
 * **Figma**
 
----
+
 
 # How We Built It
 
@@ -352,7 +352,7 @@ We also:
 * Connected a C# backend API to the frontend
 * Built randomized gameplay systems
 
----
+
 
 # Challenges
 
@@ -366,7 +366,7 @@ Some major challenges included:
 
 We used resources from the California Department of Public Health’s Maternal, Child, and Adolescent Health resources to improve accuracy.
 
----
+
 
 # Accomplishments
 
@@ -378,7 +378,7 @@ We are proud of:
 * Creating replayable randomized scenarios
 * Raising awareness about postpartum complications
 
----
+
 
 # What We Learned
 
@@ -389,7 +389,7 @@ During development, we learned:
 * How to structure scalable randomized systems
 * How to balance educational content with fun gameplay
 
----
+
 
 # Future Plans
 
@@ -400,6 +400,7 @@ We plan to add:
 * Difficulty modes
 * Audio and voice acting
 * Additional postpartum complications
+* Feature to customize amount of new features to learn per level
 * More advanced AI-driven patient behavior
 
 We also want to continue improving the educational side of the game while keeping it engaging and approachable.
