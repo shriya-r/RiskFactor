@@ -383,6 +383,21 @@
       body.popup-open > #score {
         visibility: hidden;
       }
+
+      #best-day {
+        position: fixed;
+        top: 16px;
+        right: 20px;
+        font-family: 'Nunito', sans-serif;
+        font-size: 1.3rem;
+        font-weight: 800;
+        color: white;
+        text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.7);
+        z-index: 100;
+        pointer-events: none;
+      }
+
+
     </style>
   </head>
 
@@ -425,6 +440,7 @@
     <h2 id="Person">Loading person...</h2>
     <h2 id="status" style="display: none"></h2>
     <p id="score">Score: 0</p>
+    <p id="best-day">BEST DAY: 1</p>
     <ul id="symptom-list"></ul>
 
     <script>
@@ -615,6 +631,18 @@
       let score = 0;
       let day = 1;
 
+      let bestDay = parseInt(localStorage.getItem("bestDay") || "1");
+      const bestDayElement = document.getElementById("best-day");
+      bestDayElement.innerText = `BEST DAY: ${bestDay}`;
+
+      function updateBestDay(d) {
+        if (d > bestDay) {
+          bestDay = d;
+          localStorage.setItem("bestDay", bestDay);
+          bestDayElement.innerText = `BEST DAY: ${bestDay}`;
+        }
+      }
+
       const dayElement = document.getElementById("Day");
       const person = document.getElementById("Person");
       const scoreElement = document.getElementById("score");
@@ -669,6 +697,7 @@
 
       function DaySymptoms(requestedDay) {
         playSound("dayStart");
+        updateBestDay(requestedDay);
         day = requestedDay;
         PersonNumber = 0;
         score = 0;
