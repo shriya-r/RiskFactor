@@ -306,20 +306,33 @@
 
     <script>
         const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-        let soundBuffer = null;
-        fetch("sounds/SYMPTOMS_OPEN.wav")
-            .then(r => r.arrayBuffer())
-            .then(buf => audioCtx.decodeAudioData(buf))
-            .then(decoded => { soundBuffer = decoded; });
+        const sounds = {};
+        function loadSound(name, path) {
+            fetch(path)
+                .then(r => r.arrayBuffer())
+                .then(buf => audioCtx.decodeAudioData(buf))
+                .then(decoded => { sounds[name] = decoded; });
+        }
+        loadSound("popup", "sounds/SYMPTOMS_OPEN.wav");
+        loadSound("send", "sounds/send.wav");
+        loadSound("dontSend", "sounds/dont_send.wav");
+        loadSound("disregard", "sounds/disregard.wav");
+        loadSound("crowd", "sounds/crowd.wav");
+        loadSound("dayStart", "sounds/day_start.wav");
+        loadSound("cough", "sounds/cough.wav");
 
-        function playPopupSound() {
-            if (!soundBuffer) return;
+        function playSound(name, onEnded) {
+            const buf = sounds[name];
+            if (!buf) return;
             if (audioCtx.state === "suspended") audioCtx.resume();
             const src = audioCtx.createBufferSource();
-            src.buffer = soundBuffer;
+            src.buffer = buf;
             src.connect(audioCtx.destination);
+            if (onEnded) src.onended = onEnded;
             src.start(0);
         }
+
+        function playPopupSound() { playSound("popup"); }
 
         function scale() {
             const s = Math.min(window.innerWidth / 4096, window.innerHeight / 3277);
@@ -334,7 +347,9 @@
         document
             .querySelector(".patient-file")
             .addEventListener("click", function () {
-                playPopupSound();
+                const hasCough = symptoms[PersonNumber] &&
+                    symptoms[PersonNumber].some(s => typeof s === "string" && s.toLowerCase().includes("cough"));
+                playSound("popup", hasCough ? () => playSound("cough") : null);
                 document.body.classList.add("popup-open");
                 document.querySelector(".symptoms").classList.add("visible");
                 document.querySelector(".exit-symptoms").classList.add("visible");
@@ -464,6 +479,7 @@
         dayInfoExit.addEventListener("click", closeDayInfo);
 
         function DaySymptoms(requestedDay) {
+            playSound("dayStart");
             day = requestedDay;
             PersonNumber = 0;
             score = 0;
@@ -499,6 +515,7 @@
             const health = symptoms[PersonNumber][0];
             if (choice === "Home") {
                 if (health === "Unhealthy") {
+                    playSound("disregard");
                     showResult("Disregarded a Person in Critical Condition!");
                     setTimeout(() => DaySymptoms(1), 1000);
                     return;
@@ -515,10 +532,11 @@
             dayElement.innerText = `Day ${day}`;
             scoreElement.innerText = `Score: ${score}`;
             if (PersonNumber + 1 >= symptoms.length) {
-                if (score > 8) {
+                if (score > Math.floor(symptoms.length * 0.8)) {
                     showResult("You Saved Everyone!");
                     setTimeout(() => DaySymptoms(day + 1), 1000);
                 } else {
+                    playSound("crowd");
                     showResult("The Hospital Was Overcrowded.");
                     setTimeout(() => DaySymptoms(1), 1000);
                 }
@@ -527,8 +545,8 @@
             PersonNumber += 1;
             CurrentSymptoms();
         }
-        homeButton.addEventListener("click", () => UpdateScore("Home"));
-        hospitalButton.addEventListener("click", () => UpdateScore("Hospital"));
+        homeButton.addEventListener("click", () => { playSound("dontSend"); UpdateScore("Home"); });
+        hospitalButton.addEventListener("click", () => { playSound("send"); UpdateScore("Hospital"); });
         DaySymptoms(day);
     </script>
 </body>
