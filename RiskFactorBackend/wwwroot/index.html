@@ -231,6 +231,10 @@
         text-shadow: 4px 4px 8px rgba(0, 0, 0, 0.9);
         z-index: 60;
       }
+
+      body.popup-open > #score {
+        visibility: hidden;
+      }
     </style>
   </head>
 
@@ -276,6 +280,7 @@
       document
         .querySelector(".patient-file")
         .addEventListener("click", function () {
+          document.body.classList.add("popup-open");
           document.querySelector(".symptoms").classList.add("visible");
           document.querySelector(".exit-symptoms").classList.add("visible");
           document
@@ -284,6 +289,7 @@
         });
 
       function closeSymptoms() {
+        document.body.classList.remove("popup-open");
         document.querySelector(".symptoms").classList.remove("visible");
         document.querySelector(".exit-symptoms").classList.remove("visible");
         document
@@ -382,6 +388,7 @@
       const dayInfoText = document.getElementById("day-info-text");
 
       function closeDayInfo() {
+        document.body.classList.remove("popup-open");
         dayInfoBg.classList.remove("visible");
         dayInfoExit.classList.remove("visible");
         dayInfoContainer.classList.remove("visible");
@@ -402,6 +409,7 @@
           .then((info) => {
             dayInfoText.innerText = info;
             dayInfoContainer.scrollTop = 0;
+            document.body.classList.add("popup-open");
             dayInfoBg.classList.add("visible");
             dayInfoExit.classList.add("visible");
             dayInfoContainer.classList.add("visible");
