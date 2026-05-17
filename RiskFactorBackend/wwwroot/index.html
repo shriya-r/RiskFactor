@@ -305,6 +305,22 @@
     <ul id="symptom-list"></ul>
 
     <script>
+        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        let soundBuffer = null;
+        fetch("sounds/SYMPTOMS_OPEN.wav")
+            .then(r => r.arrayBuffer())
+            .then(buf => audioCtx.decodeAudioData(buf))
+            .then(decoded => { soundBuffer = decoded; });
+
+        function playPopupSound() {
+            if (!soundBuffer) return;
+            if (audioCtx.state === "suspended") audioCtx.resume();
+            const src = audioCtx.createBufferSource();
+            src.buffer = soundBuffer;
+            src.connect(audioCtx.destination);
+            src.start(0);
+        }
+
         function scale() {
             const s = Math.min(window.innerWidth / 4096, window.innerHeight / 3277);
             const x = (window.innerWidth - 4096 * s) / 2;
@@ -318,6 +334,7 @@
         document
             .querySelector(".patient-file")
             .addEventListener("click", function () {
+                playPopupSound();
                 document.body.classList.add("popup-open");
                 document.querySelector(".symptoms").classList.add("visible");
                 document.querySelector(".exit-symptoms").classList.add("visible");
@@ -327,6 +344,7 @@
             });
 
         function closeSymptoms() {
+            playPopupSound();
             document.body.classList.remove("popup-open");
             document.querySelector(".symptoms").classList.remove("visible");
             document.querySelector(".exit-symptoms").classList.remove("visible");
@@ -432,6 +450,7 @@
         const dayInfoText = document.getElementById("day-info-text");
 
         function closeDayInfo() {
+            playPopupSound();
             document.body.classList.remove("popup-open");
             dayInfoBg.classList.remove("visible");
             dayInfoExit.classList.remove("visible");
@@ -453,6 +472,7 @@
                 .then((info) => {
                     dayInfoText.innerText = info;
                     dayInfoContainer.scrollTop = 0;
+                    playPopupSound();
                     document.body.classList.add("popup-open");
                     dayInfoBg.classList.add("visible");
                     dayInfoExit.classList.add("visible");
