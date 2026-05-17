@@ -23,12 +23,19 @@ public class SymptomBank
                 new Symptom("HighTest1", "description", new [] { "HighTest1 option 1", "HighTest1 option 2" }),
                 new Symptom("HighTest2", "description", new [] { "HighTest2 option 1", "HighTest2 option 2" }),
                 new Symptom("HighTest3", "description", new [] { "HighTest3 option 1", "HighTest3 option 2" }),
+                new Symptom("HighTest4", "description", new [] { "HighTest4 option 1", "HighTest4 option 2" }),
             },
             [SymptomPriority.MediumPriority] = new()
             {
                 new Symptom("MediumTest1", "description", new [] { "MediumTest1 option 1", "MediumTest1 option 2" }),
                 new Symptom("MediumTest2", "description", new [] { "MediumTest2 option 1", "MediumTest2 option 2" }),
                 new Symptom("MediumTest3", "description", new [] { "MediumTest3 option 1", "MediumTest3 option 2" }),
+                new Symptom("MediumTest4", "description", new [] { "MediumTest4 option 1", "MediumTest4 option 2" }),
+                new Symptom("MediumTest5", "description", new [] { "MediumTest5 option 1", "MediumTest5 option 2" }),
+                new Symptom("MediumTest6", "description", new [] { "MediumTest6 option 1", "MediumTest6 option 2" }),
+                new Symptom("MediumTest7", "description", new [] { "MediumTest7 option 1", "MediumTest7 option 2" }),
+                new Symptom("MediumTest8", "description", new [] { "MediumTest8 option 1", "MediumTest8 option 2" }),
+                new Symptom("MediumTest9", "description", new [] { "MediumTest9 option 1", "MediumTest9 option 2" }),
             },
             [SymptomPriority.NonPriority] = new()
             {
@@ -41,6 +48,8 @@ public class SymptomBank
                 new Symptom("RiskFactorTest1", "description", new [] { "RiskFactorTest1 option 1", "RiskFactorTest1 option 2" }),
                 new Symptom("RiskFactorTest2", "description", new [] { "RiskFactorTest2 option 1", "RiskFactorTest2 option 2" }),
                 new Symptom("RiskFactorTest3", "description", new [] { "RiskFactorTest3 option 1", "RiskFactorTest3 option 2" }),
+                new Symptom("RiskFactorTest4", "description", new [] { "RiskFactorTest4 option 1", "RiskFactorTest4 option 2" }),
+                new Symptom("RiskFactorTest5", "description", new [] { "RiskFactorTest5 option 1", "RiskFactorTest5 option 2" }),
             },
             [SymptomPriority.NonFactor] = new()
             {
@@ -51,6 +60,9 @@ public class SymptomBank
         };
 
     public int Count(SymptomPriority priority) => _symptoms[priority].Count;
+
+    public List<Symptom> GetRange(SymptomPriority priority, int from, int to) =>
+        _symptoms[priority].GetRange(from, to - from);
 
     private Symptom PickSymptom(SymptomPriority priority, int upTo) {
         return _symptoms[priority][_random.Next(Math.Min(upTo, _symptoms[priority].Count))];
