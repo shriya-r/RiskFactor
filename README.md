@@ -404,3 +404,13 @@ We plan to add:
 * More advanced AI-driven patient behavior
 
 We also want to continue improving the educational side of the game while keeping it engaging and approachable.
+
+
+# How To Run
+
+* Install .NET 9
+* Clone GitHub Repository
+* cd RiskFactor\RiskFactorBackend
+* dotnet run
+* Open http://localhost:5296/ on browser
+* Troubleshooting: Check to ensure port matches terminal output of dotnet run command.
