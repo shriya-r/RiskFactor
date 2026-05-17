@@ -692,7 +692,7 @@
         dayElement.innerText = `Day ${day}`;
         scoreElement.innerText = `Score: ${score}`;
         if (PersonNumber + 1 >= symptoms.length) {
-          if (score > Math.floor(symptoms.length * 0.8)) {
+          if (score >= symptoms.length - 3) {
             showResult("You Saved Everyone!");
             setTimeout(() => DaySymptoms(day + 1), 1000);
           } else {
