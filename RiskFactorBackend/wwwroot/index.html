@@ -346,6 +346,11 @@
         return `${first} ${last}`;
       }
 
+      function randomBackground() {
+        const backgrounds = ['assets/BACKGROUND.jpg', 'assets/background_1.png'];
+        return backgrounds[Math.floor(Math.random() * backgrounds.length)];
+      }
+
       let symptoms = [];
       let PersonNumber = 0;
       let score = 0;
@@ -401,6 +406,7 @@
         PersonNumber = 0;
         score = 0;
         symptoms = [];
+        document.querySelector('.background').src = randomBackground();
         dayElement.innerText = `Day ${day}`;
         scoreElement.innerText = `Score: ${score}`;
 
