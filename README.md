@@ -2,7 +2,7 @@
 
 ## Inspiration
 
-We were inspired to create **Risk Factor** after seeing how dangerous medical symptoms can sometimes be overlooked or dismissed. One personal inspiration came from a family experience involving heart disease, where concerning symptoms were initially underestimated before becoming much more serious. That experience showed us how difficult and important medical decisions can be.
+We were inspired to create Risk Factor after seeing how dangerous medical symptoms can sometimes be overlooked or dismissed. One personal inspiration came from a family experience involving heart disease, where concerning symptoms were initially underestimated before becoming much more serious. That experience showed us how difficult and important medical decisions can be.
 
 We also wanted to raise awareness about postpartum complications and the challenges pregnant women face when warning signs are mistaken for normal pregnancy or recovery symptoms. Many dangerous symptoms can appear subtle at first, which makes early recognition extremely important.
 
@@ -320,7 +320,7 @@ Additional symptoms:
 
 
 
-# Technical Details
+# Technology Stack
 
 ## Built With
 
