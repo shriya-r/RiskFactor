@@ -108,23 +108,23 @@ public class GenerateDay {
     }
 
     public string DayInfo(int day) {
-        string info = $"Day {day}:\n";
+        string info = $"=== DAY {day}: ===\n";
         switch (day) {
             case 1:
-                info += "NEW FEATURE: The patient MUST be sent to the hospital if they have even one HIGH priority symptom.\n";
+                info += "NEW FEATURE: \nThe patient MUST be sent to the hospital if they have even one HIGH PRIORITY symptom.\n";
                 break;
             case 2:
-                info += "NEW FEATURE: Patients must have at least 3 MEDIUM priority symptoms to be sent to the hospital.\n";
+                info += "NEW FEATURE: \nPatients must have at least 3 MEDIUM PRIORITY symptoms to be sent to the hospital.\n";
                 break;
             case 3:
-                info += "NEW FEATURE: If a patient has at least 1 RISK FACTOR, only 1 MEDIUM priority symptom is needed to send them to the hospital.\n";
+                info += "NEW FEATURE: \nIf a patient has at least 1 RISK FACTOR, only 1 MEDIUM PRIORITY symptom is needed to send them to the hospital.\n";
                 break;
         }
 
         var labels = new (SymptomPriority priority, string label)[] {
             (SymptomPriority.RiskFactor,     "RISK FACTOR"),
-            (SymptomPriority.MediumPriority, "MEDIUM Priority"),
-            (SymptomPriority.HighPriority,   "HIGH Priority"),
+            (SymptomPriority.MediumPriority, "MEDIUM PRIORITY"),
+            (SymptomPriority.HighPriority,   "HIGH PRIORITY"),
         };
 
         string symptomInfo = "";
@@ -133,9 +133,9 @@ public class GenerateDay {
             int to = dayAvails[day][priority];
             if (to <= from) continue;
             var newSymptoms = _bank.GetRange(priority, from, to);
-            symptomInfo += $"\nNew {label} symptoms:\n";
+            symptomInfo += $"\nNEW {label} SYMPTOMS:\n";
             foreach (var symptom in newSymptoms)
-                symptomInfo += $"{symptom.Name} - {symptom.Description}\n";
+                symptomInfo += $" • {symptom.Name} --- {symptom.Description}\n";
         }
 
         info += symptomInfo.Length > 0 ? symptomInfo : "No new information. Let's get to treating!";
