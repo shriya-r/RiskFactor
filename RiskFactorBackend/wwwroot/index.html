@@ -411,18 +411,21 @@
         visibility: hidden;
       }
 
-      #best-day {
-        position: fixed;
-        top: 16px;
-        right: 20px;
-        font-family: "Nunito", sans-serif;
-        font-size: 1.3rem;
-        font-weight: 800;
-        color: white;
-        text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.7);
-        z-index: 100;
-        pointer-events: none;
-      }
+        #best-day {
+            position: fixed;
+            top: 16px;
+            right: 50px;
+            font-family: 'Nunito', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: white;
+            text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.7);
+            z-index: 100;
+            pointer-events: none;
+        }
+        #timer-display {
+            color: red;
+        }
     </style>
   </head>
 
@@ -914,7 +917,7 @@
           score += 1;
         } else if (choice === "Hospital") {
           if (health === "Healthy") {
-            score += 2;
+            score -= 2;
             if (score < 0) playSound("drop");
           } else {
             score += 1;
