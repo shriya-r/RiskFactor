@@ -1,413 +1,415 @@
 <!doctype html>
 <html lang="en">
-
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Risk Factor</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap"
+      rel="stylesheet"
+    />
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: "Nunito", sans-serif;
-        }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Nunito", sans-serif;
+      }
 
-        html,
-        body {
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            background: #000;
-        }
+      html,
+      body {
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        background: #000;
+      }
 
-        .frame-1 {
-            position: absolute;
-            width: 4096px;
-            height: 3277px;
-            transform-origin: 0 0;
-            top: 0;
-            left: 0;
-            opacity: 0;
-            transition: opacity 0.4s ease;
-        }
+      .frame-1 {
+        position: absolute;
+        width: 4096px;
+        height: 3277px;
+        transform-origin: 0 0;
+        top: 0;
+        left: 0;
+        opacity: 0;
+        transition: opacity 0.4s ease;
+      }
 
-        .background {
-            position: absolute;
-            width: 4096px;
-            height: 3277px;
-            left: 0px;
-            top: 0px;
-        }
+      .background {
+        position: absolute;
+        width: 4096px;
+        height: 3277px;
+        left: 0px;
+        top: 0px;
+      }
 
-        .tool-box {
-            position: absolute;
-            width: 1612px;
-            height: 1009px;
-            left: 127px;
-            top: 1813.5px;
-        }
+      .tool-box {
+        position: absolute;
+        width: 1612px;
+        height: 1009px;
+        left: 127px;
+        top: 1813.5px;
+      }
 
-        .bad {
-            position: absolute;
-            width: 213px;
-            height: 209px;
-            left: 1801px;
-            top: 1972.5px;
-            cursor: pointer;
-        }
+      .bad {
+        position: absolute;
+        width: 213px;
+        height: 209px;
+        left: 1801px;
+        top: 1972.5px;
+        cursor: pointer;
+      }
 
-        .good {
-            position: absolute;
-            width: 216px;
-            height: 210px;
-            left: 2076px;
-            top: 1971.5px;
-            cursor: pointer;
-        }
+      .good {
+        position: absolute;
+        width: 216px;
+        height: 210px;
+        left: 2076px;
+        top: 1971.5px;
+        cursor: pointer;
+      }
 
-        .patient-file {
-            position: absolute;
-            width: 457px;
-            height: 372px;
-            left: 2606px;
-            top: 2027.5px;
-            cursor: pointer;
-        }
+      .patient-file {
+        position: absolute;
+        width: 457px;
+        height: 372px;
+        left: 2606px;
+        top: 2027.5px;
+        cursor: pointer;
+      }
 
-        .score {
-            position: absolute;
-            width: 720px;
-            height: 258px;
-            left: 3188px;
-            top: 480.5px;
-        }
+      .score {
+        position: absolute;
+        width: 720px;
+        height: 258px;
+        left: 3188px;
+        top: 480.5px;
+      }
 
-        #score {
-            position: absolute;
-            top: 17%;
-            left: 72%;
-            transform: translate(-50%, -50%);
-            font-size: 25px;
-            font-weight: bold;
-            z-index: 60;
-            color: black;
-            text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.8);
-        }
+      #score {
+        position: absolute;
+        top: 17%;
+        left: 72%;
+        transform: translate(-50%, -50%);
+        font-size: 25px;
+        font-weight: bold;
+        z-index: 60;
+        color: black;
+        text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.8);
+      }
 
-        .book-and-plant {
-            position: absolute;
-            width: 933px;
-            height: 621px;
-            left: 143px;
-            top: 930.5px;
-            cursor: pointer;
-        }
+      .book-and-plant {
+        position: absolute;
+        width: 933px;
+        height: 621px;
+        left: 143px;
+        top: 930.5px;
+        cursor: pointer;
+      }
 
-        .timer-wrapper {
-            position: absolute;
-            width: 782px;
-            height: 281px;
-            left: 143px;
-            top: 598.5px;
-            display: none;
-        }
+      .timer-wrapper {
+        position: absolute;
+        width: 782px;
+        height: 281px;
+        left: 143px;
+        top: 598.5px;
+        display: none;
+      }
 
-        .timer-wrapper.active {
-            display: block;
-        }
+      .timer-wrapper.active {
+        display: block;
+      }
 
-        .timer-text {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 140px;
-            font-weight: 800;
-            color: black;
-            text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.8);
-            white-space: nowrap;
-        }
+      .timer-text {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 140px;
+        font-weight: 800;
+        color: black;
+        text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.8);
+        white-space: nowrap;
+      }
 
-        .high-priority {
-            position: absolute;
-            width: 1281px;
-            height: 2470px;
-            left: 1416px;
-            top: 354.5px;
-            display: none;
-            z-index: 20;
-        }
+      .high-priority {
+        position: absolute;
+        width: 1281px;
+        height: 2470px;
+        left: 1416px;
+        top: 354.5px;
+        display: none;
+        z-index: 20;
+      }
 
-        .medium-priority {
-            position: absolute;
-            width: 1281px;
-            height: 2470px;
-            left: 2741px;
-            top: 354.5px;
-            display: none;
-            z-index: 20;
-        }
+      .medium-priority {
+        position: absolute;
+        width: 1281px;
+        height: 2470px;
+        left: 2741px;
+        top: 354.5px;
+        display: none;
+        z-index: 20;
+      }
 
-        .risk-factor {
-            position: absolute;
-            width: 1281px;
-            height: 2470px;
-            left: 95px;
-            top: 363.5px;
-            display: none;
-            z-index: 20;
-        }
+      .risk-factor {
+        position: absolute;
+        width: 1281px;
+        height: 2470px;
+        left: 95px;
+        top: 363.5px;
+        display: none;
+        z-index: 20;
+      }
 
-        .exit-book {
-            position: absolute;
-            width: 173px;
-            height: 170px;
-            left: 3849px;
-            top: 142.5px;
-            cursor: pointer;
-            display: none;
-            z-index: 100;
-            background-image: url("assets/EXIT_SYMPTOMS.png");
-            background-size: contain;
-            background-repeat: no-repeat;
-        }
+      .exit-book {
+        position: absolute;
+        width: 173px;
+        height: 170px;
+        left: 3849px;
+        top: 142.5px;
+        cursor: pointer;
+        display: none;
+        z-index: 100;
+        background-image: url("assets/EXIT_SYMPTOMS.png");
+        background-size: contain;
+        background-repeat: no-repeat;
+      }
 
-        .panel-label {
-            position: absolute;
-            width: 1281px;
-            text-align: center;
-            font-size: 120px;
-            font-weight: 800;
-            color: black;
-            pointer-events: none;
-            display: none;
-            z-index: 25;
-            padding-top: 130px;
-        }
+      .panel-label {
+        position: absolute;
+        width: 1281px;
+        text-align: center;
+        font-size: 120px;
+        font-weight: 800;
+        color: black;
+        pointer-events: none;
+        display: none;
+        z-index: 25;
+        padding-top: 130px;
+      }
 
-        .panel-symptom-list {
-            position: absolute;
-            width: 1281px;
-            overflow-y: auto;
-            scrollbar-width: none;
-            -ms-overflow-style: none;
-            display: none;
-            z-index: 26;
-            padding: 80px 90px 60px 90px;
-            box-sizing: border-box;
-        }
+      .panel-symptom-list {
+        position: absolute;
+        width: 1281px;
+        overflow-y: auto;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+        display: none;
+        z-index: 26;
+        padding: 80px 90px 60px 90px;
+        box-sizing: border-box;
+      }
 
-        .panel-symptom-list::-webkit-scrollbar {
-            display: none;
-        }
+      .panel-symptom-list::-webkit-scrollbar {
+        display: none;
+      }
 
-        .panel-footer {
-            position: absolute;
-            width: 1281px;
-            text-align: center;
-            font-size: 62px;
-            font-weight: 800;
-            color: #8b0000;
-            display: none;
-            z-index: 26;
-            padding: 30px 90px 0 90px;
-            box-sizing: border-box;
-            line-height: 1.4;
-            pointer-events: none;
-        }
+      .panel-footer {
+        position: absolute;
+        width: 1281px;
+        text-align: center;
+        font-size: 62px;
+        font-weight: 800;
+        color: #8b0000;
+        display: none;
+        z-index: 26;
+        padding: 30px 90px 0 90px;
+        box-sizing: border-box;
+        line-height: 1.4;
+        pointer-events: none;
+      }
 
-        .panel-symptom-list ul {
-            list-style: none;
-        }
+      .panel-symptom-list ul {
+        list-style: none;
+      }
 
-        .panel-symptom-list li {
-            font-size: 72px;
-            font-weight: 700;
-            color: black;
-            margin-bottom: 40px;
-            line-height: 1.3;
-        }
+      .panel-symptom-list li {
+        font-size: 72px;
+        font-weight: 700;
+        color: black;
+        margin-bottom: 40px;
+        line-height: 1.3;
+      }
 
-        .symptoms {
-            position: absolute;
-            width: 3120px;
-            height: 2589px;
-            left: 488px;
-            top: 335.5px;
-            display: none;
-            z-index: 20;
-        }
+      .symptoms {
+        position: absolute;
+        width: 3120px;
+        height: 2589px;
+        left: 488px;
+        top: 335.5px;
+        display: none;
+        z-index: 20;
+      }
 
-        .exit-symptoms {
-            position: absolute;
-            width: 173px;
-            height: 170px;
-            left: 3273px;
-            top: 480.5px;
-            cursor: pointer;
-            display: none;
-            z-index: 50;
-            background-image: url("assets/EXIT_SYMPTOMS.png");
-            background-size: contain;
-            background-repeat: no-repeat;
-        }
+      .exit-symptoms {
+        position: absolute;
+        width: 173px;
+        height: 170px;
+        left: 3273px;
+        top: 480.5px;
+        cursor: pointer;
+        display: none;
+        z-index: 50;
+        background-image: url("assets/EXIT_SYMPTOMS.png");
+        background-size: contain;
+        background-repeat: no-repeat;
+      }
 
-        .symptoms.visible,
-        .exit-symptoms.visible,
-        .high-priority.visible,
-        .medium-priority.visible,
-        .risk-factor.visible,
-        .exit-book.visible,
-        .panel-label.visible,
-        .panel-symptom-list.visible,
-        .panel-footer.visible {
-            display: block;
-        }
+      .symptoms.visible,
+      .exit-symptoms.visible,
+      .high-priority.visible,
+      .medium-priority.visible,
+      .risk-factor.visible,
+      .exit-book.visible,
+      .panel-label.visible,
+      .panel-symptom-list.visible,
+      .panel-footer.visible {
+        display: block;
+      }
 
-        h1,
-        h2,
-        p {
-            position: relative;
-            font-family: "Nunito", sans-serif;
-            color: white;
-            text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.9);
-            z-index: 30;
-            pointer-events: none;
-            margin: 10px 0;
-        }
+      h1,
+      h2,
+      p {
+        position: relative;
+        font-family: "Nunito", sans-serif;
+        color: white;
+        text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.9);
+        z-index: 30;
+        pointer-events: none;
+        margin: 10px 0;
+      }
 
-        h1 {
-            font-size: 2rem;
-            font-weight: 800;
-            letter-spacing: 0.05em;
-            padding-left: 16px;
-            padding-top: 8px;
-        }
+      h1 {
+        font-size: 2rem;
+        font-weight: 800;
+        letter-spacing: 0.05em;
+        padding-left: 16px;
+        padding-top: 8px;
+      }
 
-        h2 {
-            font-size: 1.4rem;
-            font-weight: 600;
-            padding-left: 16px;
-        }
+      h2 {
+        font-size: 1.4rem;
+        font-weight: 600;
+        padding-left: 16px;
+      }
 
-        p {
-            font-size: 1.3rem;
-            font-weight: 700;
-        }
+      p {
+        font-size: 1.3rem;
+        font-weight: 700;
+      }
 
-        #homeButton {
-            background: green;
-        }
+      #homeButton {
+        background: green;
+      }
 
-        #hospitalButton {
-            background: red;
-        }
+      #hospitalButton {
+        background: red;
+      }
 
-        #symptom-list-container {
-            position: absolute;
-            left: 720px;
-            top: 335.5px;
-            width: 2600px;
-            padding-right: 200px;
-            height: 2589px;
-            display: none;
-            flex-direction: column;
-            justify-content: flex-start;
-            padding-top: 250px;
-            z-index: 40;
-            pointer-events: none;
-        }
+      #symptom-list-container {
+        position: absolute;
+        left: 720px;
+        top: 335.5px;
+        width: 2600px;
+        padding-right: 200px;
+        height: 2589px;
+        display: none;
+        flex-direction: column;
+        justify-content: flex-start;
+        padding-top: 250px;
+        z-index: 40;
+        pointer-events: none;
+      }
 
-        #symptom-list-container.visible {
-            display: flex;
-        }
+      #symptom-list-container.visible {
+        display: flex;
+      }
 
-        #symptom-list {
-            list-style: none;
-            font-size: 110px;
-            font-weight: bold;
-            color: black;
-        }
+      #symptom-list {
+        list-style: none;
+        font-size: 110px;
+        font-weight: bold;
+        color: black;
+      }
 
-        #symptom-list li {
-            margin-bottom: 60px;
-        }
+      #symptom-list li {
+        margin-bottom: 60px;
+      }
 
-        #day-info-bg {
-            position: absolute;
-            width: 3120px;
-            height: 2589px;
-            left: 488px;
-            top: 335.5px;
-            display: none;
-            z-index: 70;
-        }
+      #day-info-bg {
+        position: absolute;
+        width: 3120px;
+        height: 2589px;
+        left: 488px;
+        top: 335.5px;
+        display: none;
+        z-index: 70;
+      }
 
-        #day-info-exit {
-            position: absolute;
-            width: 173px;
-            height: 170px;
-            left: 3273px;
-            top: 480.5px;
-            cursor: pointer;
-            display: none;
-            z-index: 90;
-            background-image: url("assets/EXIT_SYMPTOMS.png");
-            background-size: contain;
-            background-repeat: no-repeat;
-        }
+      #day-info-exit {
+        position: absolute;
+        width: 173px;
+        height: 170px;
+        left: 3273px;
+        top: 480.5px;
+        cursor: pointer;
+        display: none;
+        z-index: 90;
+        background-image: url("assets/EXIT_SYMPTOMS.png");
+        background-size: contain;
+        background-repeat: no-repeat;
+      }
 
-        #day-info-text-container {
-            position: absolute;
-            left: 720px;
-            top: 535px;
-            width: 2500px;
-            height: 2200px;
-            overflow-y: auto;
-            scrollbar-width: none;
-            -ms-overflow-style: none;
-            display: none;
-            z-index: 80;
-            padding-right: 200px;
-        }
+      #day-info-text-container {
+        position: absolute;
+        left: 720px;
+        top: 535px;
+        width: 2500px;
+        height: 2200px;
+        overflow-y: auto;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+        display: none;
+        z-index: 80;
+        padding-right: 200px;
+      }
 
-        #day-info-text-container::-webkit-scrollbar {
-            display: none;
-        }
+      #day-info-text-container::-webkit-scrollbar {
+        display: none;
+      }
 
-        #day-info-text {
-            white-space: pre-wrap;
-            font-size: 90px;
-            font-weight: bold;
-            color: #222;
-            line-height: 1.6;
-        }
+      #day-info-text {
+        white-space: pre-wrap;
+        font-size: 90px;
+        font-weight: bold;
+        color: #222;
+        line-height: 1.6;
+      }
 
-        #day-info-bg.visible,
-        #day-info-exit.visible,
-        #day-info-text-container.visible {
-            display: block;
-        }
+      #day-info-bg.visible,
+      #day-info-exit.visible,
+      #day-info-text-container.visible {
+        display: block;
+      }
 
-        #status {
-            position: absolute;
-            top: 25%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 48px;
-            font-weight: bold;
-            color: yellow;
-            text-shadow: 4px 4px 8px rgba(0, 0, 0, 0.9);
-            z-index: 60;
-        }
+      #status {
+        position: absolute;
+        top: 25%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 48px;
+        font-weight: bold;
+        color: yellow;
+        text-shadow: 4px 4px 8px rgba(0, 0, 0, 0.9);
+        z-index: 60;
+      }
 
-        body.popup-open>#score {
-            visibility: hidden;
-        }
+      body.popup-open > #score {
+        visibility: hidden;
+      }
 
         #best-day {
             position: fixed;
@@ -425,53 +427,86 @@
             color: red;
         }
     </style>
-</head>
+  </head>
 
-<body>
+  <body>
     <div class="frame-1">
-        <img class="background" src="assets/BACKGROUND.jpg" alt="" />
-        <img class="tool-box" src="assets/TOOL_BOX.png" alt="" />
-        <img class="bad" id="homeButton" src="assets/BAD.png" alt="" />
-        <img class="good" id="hospitalButton" src="assets/GOOD.png" alt="" />
-        <img class="patient-file" src="assets/PATIENT_FILE.png" alt="" />
-        <img class="score" src="assets/SCORE.png" alt="" />
-        <img class="book-and-plant" src="assets/BOOK_AND_PLANT.png" alt="" />
-        <div class="timer-wrapper" id="timer-wrapper">
-            <img style="width:100%;height:100%;" src="assets/SCORE.png" alt="" />
-            <div class="timer-text" id="timer-display">5</div>
-        </div>
-        <img class="high-priority" src="assets/HIGH_PRIORITY.png" alt="" />
-        <img class="medium-priority" src="assets/HIGH_PRIORITY.png" alt="" />
-        <img class="risk-factor" src="assets/HIGH_PRIORITY.png" alt="" />
-        <div class="panel-label" style="left: 1416px; top: 354.5px">HIGH PRIORITY</div>
-        <div class="panel-label" style="left: 2741px; top: 354.5px">MEDIUM PRIORITY</div>
-        <div class="panel-label" style="left: 95px;   top: 363.5px">RISK FACTOR</div>
-        <div class="panel-symptom-list" id="high-priority-list" style="left:1416px; top:640px; height:1850px;">
-            <ul></ul>
-        </div>
-        <div class="panel-symptom-list" id="medium-priority-list" style="left:2741px; top:640px; height:1850px;">
-            <ul></ul>
-        </div>
-        <div class="panel-symptom-list" id="risk-factor-list" style="left:95px;   top:649px; height:1850px;">
-            <ul></ul>
-        </div>
-        <div class="panel-footer" id="high-priority-footer" style="left:1416px; top:2520px;">URGENT: 1 high priority
-        </div>
-        <div class="panel-footer" id="medium-priority-footer" style="left:2741px; top:2520px;">URGENT: 3 medium priority
-        </div>
-        <div class="panel-footer" id="risk-factor-footer" style="left:95px;   top:2529px;">URGENT: 1 risk factor + 1
-            medium priority</div>
-        <div class="exit-book"></div>
-        <img class="symptoms" src="assets/SYMPTOMS.png" alt="" />
-        <div class="exit-symptoms"></div>
-        <div id="symptom-list-container">
-            <ul id="symptom-list"></ul>
-        </div>
-        <img id="day-info-bg" src="assets/SYMPTOMS.png" alt="" />
-        <div id="day-info-exit"></div>
-        <div id="day-info-text-container">
-            <div id="day-info-text"></div>
-        </div>
+      <img class="background" src="assets/BACKGROUND.jpg" alt="" />
+      <img class="tool-box" src="assets/TOOL_BOX.png" alt="" />
+      <img class="bad" id="homeButton" src="assets/BAD.png" alt="" />
+      <img class="good" id="hospitalButton" src="assets/GOOD.png" alt="" />
+      <img class="patient-file" src="assets/PATIENT_FILE.png" alt="" />
+      <img class="score" src="assets/SCORE.png" alt="" />
+      <img class="book-and-plant" src="assets/BOOK_AND_PLANT.png" alt="" />
+      <div class="timer-wrapper" id="timer-wrapper">
+        <img style="width: 100%; height: 100%" src="assets/SCORE.png" alt="" />
+        <div class="timer-text" id="timer-display">5</div>
+      </div>
+      <img class="high-priority" src="assets/HIGH_PRIORITY.png" alt="" />
+      <img class="medium-priority" src="assets/HIGH_PRIORITY.png" alt="" />
+      <img class="risk-factor" src="assets/HIGH_PRIORITY.png" alt="" />
+      <div class="panel-label" style="left: 1416px; top: 354.5px">
+        HIGH PRIORITY
+      </div>
+      <div class="panel-label" style="left: 2741px; top: 354.5px">
+        MEDIUM PRIORITY
+      </div>
+      <div class="panel-label" style="left: 95px; top: 363.5px">
+        RISK FACTOR
+      </div>
+      <div
+        class="panel-symptom-list"
+        id="high-priority-list"
+        style="left: 1416px; top: 640px; height: 1850px"
+      >
+        <ul></ul>
+      </div>
+      <div
+        class="panel-symptom-list"
+        id="medium-priority-list"
+        style="left: 2741px; top: 640px; height: 1850px"
+      >
+        <ul></ul>
+      </div>
+      <div
+        class="panel-symptom-list"
+        id="risk-factor-list"
+        style="left: 95px; top: 649px; height: 1850px"
+      >
+        <ul></ul>
+      </div>
+      <div
+        class="panel-footer"
+        id="high-priority-footer"
+        style="left: 1416px; top: 2520px"
+      >
+        URGENT: 1 high priority
+      </div>
+      <div
+        class="panel-footer"
+        id="medium-priority-footer"
+        style="left: 2741px; top: 2520px"
+      >
+        URGENT: 3 medium priority
+      </div>
+      <div
+        class="panel-footer"
+        id="risk-factor-footer"
+        style="left: 95px; top: 2529px"
+      >
+        URGENT: 1 risk factor + 1 medium priority
+      </div>
+      <div class="exit-book"></div>
+      <img class="symptoms" src="assets/SYMPTOMS.png" alt="" />
+      <div class="exit-symptoms"></div>
+      <div id="symptom-list-container">
+        <ul id="symptom-list"></ul>
+      </div>
+      <img id="day-info-bg" src="assets/SYMPTOMS.png" alt="" />
+      <div id="day-info-exit"></div>
+      <div id="day-info-text-container">
+        <div id="day-info-text"></div>
+      </div>
     </div>
 
     <h1>Risk Factor</h1>
@@ -483,406 +518,437 @@
     <ul id="symptom-list"></ul>
 
     <script>
-        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-        const sounds = {};
-        function loadSound(name, path) {
-            fetch(path)
-                .then((r) => r.arrayBuffer())
-                .then((buf) => audioCtx.decodeAudioData(buf))
-                .then((decoded) => {
-                    sounds[name] = decoded;
-                });
-        }
-        loadSound("popup", "sounds/SYMPTOMS_OPEN.wav");
-        loadSound("send", "sounds/send.wav");
-        loadSound("dontSend", "sounds/dont_send.wav");
-        loadSound("disregard", "sounds/disregard.wav");
-        loadSound("crowd", "sounds/crowd.wav");
-        loadSound("dayStart", "sounds/day_start.wav");
-        loadSound("cough", "sounds/cough.wav");
+      const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      const sounds = {};
+      function loadSound(name, path) {
+        fetch(path)
+          .then((r) => r.arrayBuffer())
+          .then((buf) => audioCtx.decodeAudioData(buf))
+          .then((decoded) => {
+            sounds[name] = decoded;
+          });
+      }
+      loadSound("popup", "sounds/SYMPTOMS_OPEN.wav");
+      loadSound("send", "sounds/send.wav");
+      loadSound("dontSend", "sounds/dont_send.wav");
+      loadSound("disregard", "sounds/disregard.wav");
+      loadSound("crowd", "sounds/crowd.wav");
+      loadSound("dayStart", "sounds/day_start.wav");
+      loadSound("cough", "sounds/cough.wav");
+      loadSound("alarm", "sounds/alarm.mp3");
+      loadSound("drop", "sounds/drop.wav");
 
-        function playSound(name, onEnded) {
-            const buf = sounds[name];
-            if (!buf) return;
-            if (audioCtx.state === "suspended") audioCtx.resume();
-            const src = audioCtx.createBufferSource();
-            src.buffer = buf;
-            src.connect(audioCtx.destination);
-            if (onEnded) src.onended = onEnded;
-            src.start(0);
-        }
+      function playSound(name, onEnded) {
+        const buf = sounds[name];
+        if (!buf) return;
+        if (audioCtx.state === "suspended") audioCtx.resume();
+        const src = audioCtx.createBufferSource();
+        src.buffer = buf;
+        src.connect(audioCtx.destination);
+        if (onEnded) src.onended = onEnded;
+        src.start(0);
+      }
 
-        function playPopupSound() {
-            playSound("popup");
-        }
+      function playPopupSound() {
+        playSound("popup");
+      }
 
-        function scale() {
-            const s = Math.min(window.innerWidth / 4096, window.innerHeight / 3277);
-            const x = (window.innerWidth - 4096 * s) / 2;
-            const y = (window.innerHeight - 3277 * s) / 2;
-            document.querySelector(".frame-1").style.transform =
-                `translate(${x}px, ${y}px) scale(${s})`;
-        }
-        scale();
-        window.addEventListener("resize", scale);
-        window.addEventListener("load", () => {
-            document.querySelector(".frame-1").style.opacity = "1";
+      function scale() {
+        const s = Math.min(window.innerWidth / 4096, window.innerHeight / 3277);
+        const x = (window.innerWidth - 4096 * s) / 2;
+        const y = (window.innerHeight - 3277 * s) / 2;
+        document.querySelector(".frame-1").style.transform =
+          `translate(${x}px, ${y}px) scale(${s})`;
+      }
+      scale();
+      window.addEventListener("resize", scale);
+      window.addEventListener("load", () => {
+        document.querySelector(".frame-1").style.opacity = "1";
+      });
+
+      document
+        .querySelector(".patient-file")
+        .addEventListener("click", function () {
+          const hasCough =
+            symptoms[PersonNumber] &&
+            symptoms[PersonNumber].some(
+              (s) => typeof s === "string" && s.toLowerCase().includes("cough"),
+            );
+          playSound("popup", hasCough ? () => playSound("cough") : null);
+          document.body.classList.add("popup-open");
+          document.querySelector(".symptoms").classList.add("visible");
+          document.querySelector(".exit-symptoms").classList.add("visible");
+          document
+            .getElementById("symptom-list-container")
+            .classList.add("visible");
         });
 
+      function closeSymptoms() {
+        playPopupSound();
+        document.body.classList.remove("popup-open");
+        document.querySelector(".symptoms").classList.remove("visible");
+        document.querySelector(".exit-symptoms").classList.remove("visible");
         document
-            .querySelector(".patient-file")
-            .addEventListener("click", function () {
-                const hasCough =
-                    symptoms[PersonNumber] &&
-                    symptoms[PersonNumber].some(
-                        (s) => typeof s === "string" && s.toLowerCase().includes("cough"),
-                    );
-                playSound("popup", hasCough ? () => playSound("cough") : null);
-                document.body.classList.add("popup-open");
-                document.querySelector(".symptoms").classList.add("visible");
-                document.querySelector(".exit-symptoms").classList.add("visible");
-                document
-                    .getElementById("symptom-list-container")
-                    .classList.add("visible");
-            });
+          .getElementById("symptom-list-container")
+          .classList.remove("visible");
+      }
 
-        function closeSymptoms() {
-            playPopupSound();
-            document.body.classList.remove("popup-open");
-            document.querySelector(".symptoms").classList.remove("visible");
-            document.querySelector(".exit-symptoms").classList.remove("visible");
+      document
+        .querySelector(".exit-symptoms")
+        .addEventListener("click", closeSymptoms);
+      document
+        .querySelector(".symptoms")
+        .addEventListener("click", closeSymptoms);
+
+      let footerVisibility = { high: false, medium: false, risk: false };
+
+      function populatePanelList(id, names, emptyMsg) {
+        const ul = document.querySelector(`#${id} ul`);
+        ul.innerHTML = "";
+        if (!names || names.length === 0) {
+          const li = document.createElement("li");
+          li.innerText = emptyMsg || "";
+          li.style.opacity = "0.5";
+          ul.appendChild(li);
+          return;
+        }
+        names.forEach((name) => {
+          const li = document.createElement("li");
+          li.innerText = name;
+          ul.appendChild(li);
+        });
+      }
+
+      document
+        .querySelector(".book-and-plant")
+        .addEventListener("click", function () {
+          playPopupSound();
+          document.body.classList.add("popup-open");
+          document.querySelector(".high-priority").classList.add("visible");
+          document.querySelector(".medium-priority").classList.add("visible");
+          document.querySelector(".risk-factor").classList.add("visible");
+          document.querySelector(".exit-book").classList.add("visible");
+          document
+            .querySelectorAll(".panel-label")
+            .forEach((el) => el.classList.add("visible"));
+          document
+            .querySelectorAll(".panel-symptom-list")
+            .forEach((el) => el.classList.add("visible"));
+          if (footerVisibility.high)
             document
-                .getElementById("symptom-list-container")
-                .classList.remove("visible");
-        }
+              .getElementById("high-priority-footer")
+              .classList.add("visible");
+          if (footerVisibility.medium)
+            document
+              .getElementById("medium-priority-footer")
+              .classList.add("visible");
+          if (footerVisibility.risk)
+            document
+              .getElementById("risk-factor-footer")
+              .classList.add("visible");
+        });
 
+      function closeBook() {
+        playPopupSound();
+        document.body.classList.remove("popup-open");
+        document.querySelector(".high-priority").classList.remove("visible");
+        document.querySelector(".medium-priority").classList.remove("visible");
+        document.querySelector(".risk-factor").classList.remove("visible");
+        document.querySelector(".exit-book").classList.remove("visible");
         document
-            .querySelector(".exit-symptoms")
-            .addEventListener("click", closeSymptoms);
+          .querySelectorAll(".panel-label")
+          .forEach((el) => el.classList.remove("visible"));
         document
-            .querySelector(".symptoms")
-            .addEventListener("click", closeSymptoms);
-
-        let footerVisibility = { high: false, medium: false, risk: false };
-
-        function populatePanelList(id, names, emptyMsg) {
-            const ul = document.querySelector(`#${id} ul`);
-            ul.innerHTML = "";
-            if (!names || names.length === 0) {
-                const li = document.createElement("li");
-                li.innerText = emptyMsg || "";
-                li.style.opacity = "0.5";
-                ul.appendChild(li);
-                return;
-            }
-            names.forEach((name) => {
-                const li = document.createElement("li");
-                li.innerText = name;
-                ul.appendChild(li);
-            });
-        }
-
+          .querySelectorAll(".panel-symptom-list")
+          .forEach((el) => el.classList.remove("visible"));
         document
-            .querySelector(".book-and-plant")
-            .addEventListener("click", function () {
-                playPopupSound();
-                document.body.classList.add("popup-open");
-                document.querySelector(".high-priority").classList.add("visible");
-                document.querySelector(".medium-priority").classList.add("visible");
-                document.querySelector(".risk-factor").classList.add("visible");
-                document.querySelector(".exit-book").classList.add("visible");
-                document.querySelectorAll(".panel-label").forEach((el) => el.classList.add("visible"));
-                document.querySelectorAll(".panel-symptom-list").forEach((el) => el.classList.add("visible"));
-                if (footerVisibility.high) document.getElementById("high-priority-footer").classList.add("visible");
-                if (footerVisibility.medium) document.getElementById("medium-priority-footer").classList.add("visible");
-                if (footerVisibility.risk) document.getElementById("risk-factor-footer").classList.add("visible");
-            });
+          .querySelectorAll(".panel-footer")
+          .forEach((el) => el.classList.remove("visible"));
+      }
 
-        function closeBook() {
-            playPopupSound();
-            document.body.classList.remove("popup-open");
-            document.querySelector(".high-priority").classList.remove("visible");
-            document.querySelector(".medium-priority").classList.remove("visible");
-            document.querySelector(".risk-factor").classList.remove("visible");
-            document.querySelector(".exit-book").classList.remove("visible");
-            document.querySelectorAll(".panel-label").forEach((el) => el.classList.remove("visible"));
-            document.querySelectorAll(".panel-symptom-list").forEach((el) => el.classList.remove("visible"));
-            document.querySelectorAll(".panel-footer").forEach((el) => el.classList.remove("visible"));
-        }
+      document.querySelector(".exit-book").addEventListener("click", closeBook);
 
-        document.querySelector(".exit-book").addEventListener("click", closeBook);
+      const firstNames = [
+        "Shriya",
+        "Alana",
+        "Rebecca",
+        "Maria",
+        "Priya",
+        "Jordan",
+        "Taylor",
+        "Carmen",
+        "Destiny",
+        "Fatima",
+        "Mei",
+        "Aaliyah",
+        "Sofia",
+        "Nadia",
+        "Layla",
+      ];
+      const lastNames = [
+        "Rajesh",
+        "Zhao",
+        "Tio",
+        "Johnson",
+        "Williams",
+        "Patel",
+        "Nguyen",
+        "Martinez",
+        "Brown",
+        "Kim",
+        "Okafor",
+        "Hassan",
+        "Rivera",
+        "Chen",
+        "Thompson",
+      ];
+      let names = [];
 
-        const firstNames = [
-            "Shriya",
-            "Alana",
-            "Rebecca",
-            "Maria",
-            "Priya",
-            "Jordan",
-            "Taylor",
-            "Carmen",
-            "Destiny",
-            "Fatima",
-            "Mei",
-            "Aaliyah",
-            "Sofia",
-            "Nadia",
-            "Layla",
+      function randomName() {
+        const first = firstNames[Math.floor(Math.random() * firstNames.length)];
+        const last = lastNames[Math.floor(Math.random() * lastNames.length)];
+        return `${first} ${last}`;
+      }
+
+      function randomBackground() {
+        const backgrounds = [
+          "assets/BACKGROUND.jpg",
+          "assets/background_1.png",
+          "assets/background_2.jpg",
+          "assets/background_3.jpg",
+          "assets/background_4.jpg",
+          "assets/background_5.jpg",
+          "assets/background_6.jpg",
+          "assets/background_7.jpg",
         ];
-        const lastNames = [
-            "Rajesh",
-            "Zhao",
-            "Tio",
-            "Johnson",
-            "Williams",
-            "Patel",
-            "Nguyen",
-            "Martinez",
-            "Brown",
-            "Kim",
-            "Okafor",
-            "Hassan",
-            "Rivera",
-            "Chen",
-            "Thompson",
-        ];
-        let names = [];
+        return backgrounds[Math.floor(Math.random() * backgrounds.length)];
+      }
 
-        function randomName() {
-            const first = firstNames[Math.floor(Math.random() * firstNames.length)];
-            const last = lastNames[Math.floor(Math.random() * lastNames.length)];
-            return `${first} ${last}`;
+      let symptoms = [];
+      let PersonNumber = 0;
+      let score = 0;
+      let day = 1;
+
+      let timerInterval = null;
+      let timerSecondsLeft = 0;
+      let timerPaused = false;
+      let transitioning = false;
+      const timerWrapper = document.getElementById("timer-wrapper");
+      const timerDisplay = document.getElementById("timer-display");
+
+      function getTimerDuration(d) {
+        if (d < 5) return 0;
+        return Math.max(2, 15 - d);
+      }
+
+      function stopTimer() {
+        if (timerInterval) {
+          clearInterval(timerInterval);
+          timerInterval = null;
         }
+        timerWrapper.classList.remove("active");
+      }
 
-        function randomBackground() {
-            const backgrounds = [
-                "assets/BACKGROUND.jpg",
-                "assets/background_1.png",
-                "assets/background_2.jpg",
-                "assets/background_3.jpg",
-                "assets/background_4.jpg",
-                "assets/background_5.jpg",
-                "assets/background_6.jpg",
-                "assets/background_7.jpg",
-            ];
-            return backgrounds[Math.floor(Math.random() * backgrounds.length)];
-        }
-
-        let symptoms = [];
-        let PersonNumber = 0;
-        let score = 0;
-        let day = 1;
-
-        let timerInterval = null;
-        let timerSecondsLeft = 0;
-        let timerPaused = false;
-        let transitioning = false;
-        const timerWrapper = document.getElementById("timer-wrapper");
-        const timerDisplay = document.getElementById("timer-display");
-
-        function getTimerDuration(d) {
-            if (d < 5) return 0;
-            return Math.max(2, 15 - d);
-        }
-
-        function stopTimer() {
-            if (timerInterval) { clearInterval(timerInterval); timerInterval = null; }
-            timerWrapper.classList.remove("active");
-        }
-
-        function startTimer() {
+      function startTimer() {
+        stopTimer();
+        const duration = getTimerDuration(day);
+        if (duration === 0) return;
+        timerSecondsLeft = duration;
+        timerDisplay.innerText = timerSecondsLeft;
+        timerWrapper.classList.add("active");
+        timerInterval = setInterval(() => {
+          if (timerPaused) return;
+          timerSecondsLeft--;
+          timerDisplay.innerText = timerSecondsLeft;
+          if (timerSecondsLeft <= 0) {
+            transitioning = true;
             stopTimer();
-            const duration = getTimerDuration(day);
-            if (duration === 0) return;
-            timerSecondsLeft = duration;
-            timerDisplay.innerText = timerSecondsLeft;
-            timerWrapper.classList.add("active");
-            timerInterval = setInterval(() => {
-                if (timerPaused) return;
-                timerSecondsLeft--;
-                timerDisplay.innerText = timerSecondsLeft;
-                if (timerSecondsLeft <= 0) {
-                    transitioning = true;
-                    stopTimer();
-                    showResult("Took Too Much Time!");
-                    setTimeout(() => DaySymptoms(1), 1000);
-                }
-            }, 1000);
+            playSound("alarm");
+            showResult("Took Too Much Time!");
+            setTimeout(() => DaySymptoms(1), 1000);
+          }
+        }, 1000);
+      }
+
+      let bestDay = parseInt(localStorage.getItem("bestDay") || "1");
+      const bestDayElement = document.getElementById("best-day");
+      bestDayElement.innerText = `BEST DAY: ${bestDay}`;
+
+      function updateBestDay(d) {
+        if (d > bestDay) {
+          bestDay = d;
+          localStorage.setItem("bestDay", bestDay);
+          bestDayElement.innerText = `BEST DAY: ${bestDay}`;
         }
+      }
 
-        let bestDay = parseInt(localStorage.getItem("bestDay") || "1");
-        const bestDayElement = document.getElementById("best-day");
-        bestDayElement.innerText = `BEST DAY: ${bestDay}`;
+      const dayElement = document.getElementById("Day");
+      const person = document.getElementById("Person");
+      const scoreElement = document.getElementById("score");
+      const statusElement = document.getElementById("status");
+      const symptomList = document.getElementById("symptom-list");
+      const homeButton = document.getElementById("homeButton");
+      const hospitalButton = document.getElementById("hospitalButton");
+      const badLayer = document.getElementById("badLayer");
+      const goodLayer = document.getElementById("goodLayer");
 
-        function updateBestDay(d) {
-            if (d > bestDay) {
-                bestDay = d;
-                localStorage.setItem("bestDay", bestDay);
-                bestDayElement.innerText = `BEST DAY: ${bestDay}`;
-            }
+      function CurrentSymptoms() {
+        const currentSymptoms = symptoms[PersonNumber];
+        person.innerText = names[PersonNumber];
+        const currBackground = document.querySelector(".background");
+        const isBlack = currentSymptoms.some((s) => s === "I'm Black.");
+        let newBackground = isBlack
+          ? "assets/background_1.png"
+          : randomBackground();
+        if (!isBlack) {
+          while (currBackground.src.includes(newBackground)) {
+            newBackground = randomBackground();
+          }
         }
-
-        const dayElement = document.getElementById("Day");
-        const person = document.getElementById("Person");
-        const scoreElement = document.getElementById("score");
-        const statusElement = document.getElementById("status");
-        const symptomList = document.getElementById("symptom-list");
-        const homeButton = document.getElementById("homeButton");
-        const hospitalButton = document.getElementById("hospitalButton");
-        const badLayer = document.getElementById("badLayer");
-        const goodLayer = document.getElementById("goodLayer");
-
-        function CurrentSymptoms() {
-            const currentSymptoms = symptoms[PersonNumber];
-            person.innerText = names[PersonNumber];
-            const currBackground = document.querySelector(".background");
-            const isBlack = currentSymptoms.some((s) => s === "I'm Black.");
-            let newBackground = isBlack
-                ? "assets/background_1.png"
-                : randomBackground();
-            if (!isBlack) {
-                while (currBackground.src.includes(newBackground)) {
-                    newBackground = randomBackground();
-                }
-            }
-            currBackground.src = newBackground;
-            symptomList.innerHTML = "";
-            for (let i = 1; i < currentSymptoms.length; i++) {
-                const li = document.createElement("li");
-                li.innerText = currentSymptoms[i];
-                symptomList.appendChild(li);
-            }
-            startTimer();
+        currBackground.src = newBackground;
+        symptomList.innerHTML = "";
+        for (let i = 1; i < currentSymptoms.length; i++) {
+          const li = document.createElement("li");
+          li.innerText = currentSymptoms[i];
+          symptomList.appendChild(li);
         }
+        startTimer();
+      }
 
-        function showResult(result) {
-            statusElement.innerText = result;
-            statusElement.style.display = "block";
-            setTimeout(() => {
-                statusElement.style.display = "none";
-            }, 1000);
-        }
+      function showResult(result) {
+        statusElement.innerText = result;
+        statusElement.style.display = "block";
+        setTimeout(() => {
+          statusElement.style.display = "none";
+        }, 1000);
+      }
 
-        const dayInfoBg = document.getElementById("day-info-bg");
-        const dayInfoExit = document.getElementById("day-info-exit");
-        const dayInfoContainer = document.getElementById(
-            "day-info-text-container",
-        );
-        const dayInfoText = document.getElementById("day-info-text");
+      const dayInfoBg = document.getElementById("day-info-bg");
+      const dayInfoExit = document.getElementById("day-info-exit");
+      const dayInfoContainer = document.getElementById(
+        "day-info-text-container",
+      );
+      const dayInfoText = document.getElementById("day-info-text");
 
-        function closeDayInfo() {
+      function closeDayInfo() {
+        playPopupSound();
+        timerPaused = false;
+        document.body.classList.remove("popup-open");
+        dayInfoBg.classList.remove("visible");
+        dayInfoExit.classList.remove("visible");
+        dayInfoContainer.classList.remove("visible");
+      }
+
+      dayInfoExit.addEventListener("click", closeDayInfo);
+
+      function DaySymptoms(requestedDay) {
+        transitioning = false;
+        stopTimer();
+        playSound("dayStart");
+        updateBestDay(requestedDay);
+        day = requestedDay;
+        PersonNumber = 0;
+        score = 0;
+        symptoms = [];
+        dayElement.innerText = `Day ${day}`;
+        scoreElement.innerText = `Score: ${score}`;
+
+        fetch(`/api/symptoms?day=${day}`)
+          .then((r) => r.json())
+          .then((data) => {
+            const hp = data.high_priority || [];
+            const mp = data.medium_priority || [];
+            const rf = data.risk_factor || [];
+            populatePanelList(
+              "high-priority-list",
+              hp,
+              "No high priority symptoms known.",
+            );
+            populatePanelList(
+              "medium-priority-list",
+              mp,
+              "No medium priority symptoms known.",
+            );
+            populatePanelList("risk-factor-list", rf, "No risk factors known.");
+            footerVisibility = {
+              high: hp.length > 0,
+              medium: mp.length > 0,
+              risk: rf.length > 0 && mp.length > 0,
+            };
+          });
+
+        fetch(`/api/dayinfo?day=${day}`)
+          .then((r) => r.text())
+          .then((info) => {
+            dayInfoText.innerText = info;
+            dayInfoContainer.scrollTop = 0;
             playPopupSound();
-            timerPaused = false;
-            document.body.classList.remove("popup-open");
-            dayInfoBg.classList.remove("visible");
-            dayInfoExit.classList.remove("visible");
-            dayInfoContainer.classList.remove("visible");
-        }
+            timerPaused = true;
+            document.body.classList.add("popup-open");
+            dayInfoBg.classList.add("visible");
+            dayInfoExit.classList.add("visible");
+            dayInfoContainer.classList.add("visible");
+          });
 
-        dayInfoExit.addEventListener("click", closeDayInfo);
-
-        function DaySymptoms(requestedDay) {
-            transitioning = false;
-            stopTimer();
-            playSound("dayStart");
-            updateBestDay(requestedDay);
-            day = requestedDay;
-            PersonNumber = 0;
-            score = 0;
-            symptoms = [];
-            dayElement.innerText = `Day ${day}`;
-            scoreElement.innerText = `Score: ${score}`;
-
-            fetch(`/api/symptoms?day=${day}`)
-                .then((r) => r.json())
-                .then((data) => {
-                    const hp = data.high_priority || [];
-                    const mp = data.medium_priority || [];
-                    const rf = data.risk_factor || [];
-                    populatePanelList("high-priority-list", hp, "No high priority symptoms known.");
-                    populatePanelList("medium-priority-list", mp, "No medium priority symptoms known.");
-                    populatePanelList("risk-factor-list", rf, "No risk factors known.");
-                    footerVisibility = {
-                        high: hp.length > 0,
-                        medium: mp.length > 0,
-                        risk: rf.length > 0 && mp.length > 0,
-                    };
-                });
-
-            fetch(`/api/dayinfo?day=${day}`)
-                .then((r) => r.text())
-                .then((info) => {
-                    dayInfoText.innerText = info;
-                    dayInfoContainer.scrollTop = 0;
-                    playPopupSound();
-                    timerPaused = true;
-                    document.body.classList.add("popup-open");
-                    dayInfoBg.classList.add("visible");
-                    dayInfoExit.classList.add("visible");
-                    dayInfoContainer.classList.add("visible");
-                });
-
-            fetch(`/api/message?day=${day}`)
-                .then((response) => response.json())
-                .then((data) => {
-                    symptoms = data;
-                    names = symptoms.map(() => randomName());
-                    CurrentSymptoms();
-                })
-                .catch(() => {
-                    person.innerText = "Error loading symptoms.";
-                });
-        }
-
-        function UpdateScore(choice) {
-            if (transitioning) return;
-            stopTimer();
-            const health = symptoms[PersonNumber][0];
-            if (choice === "Home") {
-                if (health === "Unhealthy") {
-                    transitioning = true;
-                    playSound("disregard");
-                    showResult("Disregarded a Person in Critical Condition!");
-                    setTimeout(() => DaySymptoms(1), 1000);
-                    return;
-                }
-                score += 1;
-            }
-            else if (choice === "Hospital") {
-                if (health === "Healthy") {
-                    score -= 2;
-                }
-                else {
-                    score += 1;
-                }
-            }
-            dayElement.innerText = `Day ${day}`;
-            scoreElement.innerText = `Score: ${score}`;
-            if (PersonNumber + 1 >= symptoms.length) {
-                transitioning = true;
-                if (score >= symptoms.length - 3) {
-                    showResult("You Saved Everyone!");
-                    setTimeout(() => DaySymptoms(day + 1), 1000);
-                } else {
-                    playSound("crowd");
-                    showResult("The Hospital Was Overcrowded.");
-                    setTimeout(() => DaySymptoms(1), 1000);
-                }
-                return;
-            }
-            PersonNumber += 1;
+        fetch(`/api/message?day=${day}`)
+          .then((response) => response.json())
+          .then((data) => {
+            symptoms = data;
+            names = symptoms.map(() => randomName());
             CurrentSymptoms();
-        }
-        homeButton.addEventListener("click", () => {
-            playSound("dontSend");
-            UpdateScore("Home");
-        });
-        hospitalButton.addEventListener("click", () => {
-            playSound("send");
-            UpdateScore("Hospital");
-        });
-        DaySymptoms(day);
-    </script>
-</body>
+          })
+          .catch(() => {
+            person.innerText = "Error loading symptoms.";
+          });
+      }
 
+      function UpdateScore(choice) {
+        if (transitioning) return;
+        stopTimer();
+        const health = symptoms[PersonNumber][0];
+        if (choice === "Home") {
+          if (health === "Unhealthy") {
+            transitioning = true;
+            playSound("disregard");
+            showResult("Disregarded a Person in Critical Condition!");
+            setTimeout(() => DaySymptoms(1), 1000);
+            return;
+          }
+          score += 1;
+        } else if (choice === "Hospital") {
+          if (health === "Healthy") {
+            score -= 2;
+            if (score < 0) playSound("drop");
+          } else {
+            score += 1;
+          }
+        }
+        dayElement.innerText = `Day ${day}`;
+        scoreElement.innerText = `Score: ${score}`;
+        if (PersonNumber + 1 >= symptoms.length) {
+          transitioning = true;
+          if (score >= symptoms.length - 3) {
+            showResult("You Saved Everyone!");
+            setTimeout(() => DaySymptoms(day + 1), 1000);
+          } else {
+            playSound("crowd");
+            showResult("The Hospital Was Overcrowded.");
+            setTimeout(() => DaySymptoms(1), 1000);
+          }
+          return;
+        }
+        PersonNumber += 1;
+        CurrentSymptoms();
+      }
+      homeButton.addEventListener("click", () => {
+        playSound("dontSend");
+        UpdateScore("Home");
+      });
+      hospitalButton.addEventListener("click", () => {
+        playSound("send");
+        UpdateScore("Hospital");
+      });
+      DaySymptoms(day);
+    </script>
+  </body>
 </html>
