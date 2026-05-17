@@ -20,4 +20,14 @@ app.MapGet("/api/message", (HttpRequest req) =>
     }
     return generateDay.Symptoms(Day);
 });
+
+app.MapGet("/api/dayinfo", (HttpRequest req) => {
+    var dayQuery = req.Query["day"].FirstOrDefault();
+    int Day = 1;
+    if (!string.IsNullOrEmpty(dayQuery) && int.TryParse(dayQuery, out var parsedDay)) {
+        Day = parsedDay;
+    }
+    return Results.Text(generateDay.DayInfo(Day));
+});
+
 app.Run();
