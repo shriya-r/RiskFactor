@@ -107,6 +107,31 @@
             cursor: pointer;
         }
 
+        .timer-wrapper {
+            position: absolute;
+            width: 782px;
+            height: 281px;
+            left: 143px;
+            top: 598.5px;
+            display: none;
+        }
+
+        .timer-wrapper.active {
+            display: block;
+        }
+
+        .timer-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 140px;
+            font-weight: 800;
+            color: black;
+            text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.8);
+            white-space: nowrap;
+        }
+
         .high-priority {
             position: absolute;
             width: 1281px;
@@ -408,6 +433,10 @@
         <img class="patient-file" src="assets/PATIENT_FILE.png" alt="" />
         <img class="score" src="assets/SCORE.png" alt="" />
         <img class="book-and-plant" src="assets/BOOK_AND_PLANT.png" alt="" />
+        <div class="timer-wrapper" id="timer-wrapper">
+            <img style="width:100%;height:100%;" src="assets/SCORE.png" alt="" />
+            <div class="timer-text" id="timer-display">5</div>
+        </div>
         <img class="high-priority" src="assets/HIGH_PRIORITY.png" alt="" />
         <img class="medium-priority" src="assets/HIGH_PRIORITY.png" alt="" />
         <img class="risk-factor" src="assets/HIGH_PRIORITY.png" alt="" />
@@ -641,6 +670,41 @@
         let score = 0;
         let day = 1;
 
+        let timerInterval = null;
+        let timerSecondsLeft = 0;
+        let timerPaused = false;
+        const timerWrapper = document.getElementById("timer-wrapper");
+        const timerDisplay = document.getElementById("timer-display");
+
+        function getTimerDuration(d) {
+            if (d < 5) return 0;
+            return Math.max(2, 15 - d);
+        }
+
+        function stopTimer() {
+            if (timerInterval) { clearInterval(timerInterval); timerInterval = null; }
+            timerWrapper.classList.remove("active");
+        }
+
+        function startTimer() {
+            stopTimer();
+            const duration = getTimerDuration(day);
+            if (duration === 0) return;
+            timerSecondsLeft = duration;
+            timerDisplay.innerText = timerSecondsLeft;
+            timerWrapper.classList.add("active");
+            timerInterval = setInterval(() => {
+                if (timerPaused) return;
+                timerSecondsLeft--;
+                timerDisplay.innerText = timerSecondsLeft;
+                if (timerSecondsLeft <= 0) {
+                    stopTimer();
+                    showResult("Took Too Much Time!");
+                    setTimeout(() => DaySymptoms(1), 1000);
+                }
+            }, 1000);
+        }
+
         let bestDay = parseInt(localStorage.getItem("bestDay") || "1");
         const bestDayElement = document.getElementById("best-day");
         bestDayElement.innerText = `BEST DAY: ${bestDay}`;
@@ -667,9 +731,14 @@
             const currentSymptoms = symptoms[PersonNumber];
             person.innerText = names[PersonNumber];
             const currBackground = document.querySelector(".background");
-            let newBackground = randomBackground();
-            while (currBackground.src.includes(newBackground)) {
-                newBackground = randomBackground();
+            const isBlack = currentSymptoms.some((s) => s === "I'm Black.");
+            let newBackground = isBlack
+                ? "assets/background_1.png"
+                : randomBackground();
+            if (!isBlack) {
+                while (currBackground.src.includes(newBackground)) {
+                    newBackground = randomBackground();
+                }
             }
             currBackground.src = newBackground;
             symptomList.innerHTML = "";
@@ -678,6 +747,7 @@
                 li.innerText = currentSymptoms[i];
                 symptomList.appendChild(li);
             }
+            startTimer();
         }
 
         function showResult(result) {
@@ -697,6 +767,7 @@
 
         function closeDayInfo() {
             playPopupSound();
+            timerPaused = false;
             document.body.classList.remove("popup-open");
             dayInfoBg.classList.remove("visible");
             dayInfoExit.classList.remove("visible");
@@ -706,6 +777,7 @@
         dayInfoExit.addEventListener("click", closeDayInfo);
 
         function DaySymptoms(requestedDay) {
+            stopTimer();
             playSound("dayStart");
             updateBestDay(requestedDay);
             day = requestedDay;
@@ -737,6 +809,7 @@
                     dayInfoText.innerText = info;
                     dayInfoContainer.scrollTop = 0;
                     playPopupSound();
+                    timerPaused = true;
                     document.body.classList.add("popup-open");
                     dayInfoBg.classList.add("visible");
                     dayInfoExit.classList.add("visible");
@@ -756,6 +829,7 @@
         }
 
         function UpdateScore(choice) {
+            stopTimer();
             const health = symptoms[PersonNumber][0];
             if (choice === "Home") {
                 if (health === "Unhealthy") {

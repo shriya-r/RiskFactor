@@ -131,6 +131,9 @@ public class GenerateDay {
             case 3:
                 info += "NEW FEATURE: \nIf a patient has at least 1 RISK FACTOR, only 1 MEDIUM PRIORITY symptom is needed to send them to the hospital.\n";
                 break;
+            case 5:
+                info += "NEW FEATURE: \nYou now must make a decision within a time limit! The time limit will decrease as days go on.\n";
+                break;
         }
 
         var labels = new (SymptomPriority priority, string label)[] {
