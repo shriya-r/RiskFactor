@@ -2,8 +2,153 @@
 <html>
 <head>
     <title>Risk Factor</title>
+    <style>
+        .frame-1 {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: -1;
+        }
+
+        .background {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            left: 0px;
+            top: 0px;
+            background: url('assets/BACKGROUND.jpg');
+            background-size: cover;
+            background-attachment: fixed;
+        }
+
+        .bad {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            left: 0px;
+            top: 0px;
+            background: url('assets/BAD.png');
+            background-size: contain;
+            display: none;
+        }
+
+        .good {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            left: 0px;
+            top: 0px;
+            background: url('assets/GOOD.png');
+            background-size: contain;
+            display: none;
+        }
+
+        .patient-file {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            left: 0px;
+            top: 0px;
+            background: url('assets/PATIENT_FILE.png');
+            background-size: contain;
+            display: none;
+        }
+
+        .score {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            left: 0px;
+            top: 0px;
+            background: url('assets/SCORE.png');
+            background-size: contain;
+            display: none;
+        }
+
+        .tool-box {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            left: 0px;
+            top: 0px;
+            background: url('assets/TOOL_BOX.png');
+            background-size: contain;
+            display: none;
+        }
+
+        .book-and-plant {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            left: 0px;
+            top: 0px;
+            background: url('assets/BOOK_AND_PLANT.png');
+            background-size: contain;
+            display: none;
+        }
+
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+            position: relative;
+            z-index: 1;
+        }
+
+        h1, h2, p {
+            margin: 10px 0;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+        }
+
+        #buttons {
+            margin-top: 445px;
+        }
+        button {
+            margin-left: 515px;
+            padding: 15px 25px;
+            font-size: 16px;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        #homeButton {
+            background: green;
+        }
+        #hospitalButton {
+            background: red;
+            margin-left: 20px;
+        }
+
+        #symptom-list {
+            list-style: none;
+            margin-top: -520px;
+            margin-left: 950px;
+            font-weight: bold;
+            color: white;
+            text-shadow: 2px 2px 4px rgb(0, 0, 0);
+        }
+        #symptom-list li {
+            margin-bottom: 5px;
+        }
+
+    </style>
 </head>
 <body>
+
+<div class="frame-1">
+  <div class="background"></div>
+  <div class="bad" id="badLayer"></div>
+  <div class="good" id="goodLayer"></div>
+  <div class="patient-file"></div>
+  <div class="score"></div>
+  <div class="tool-box"></div>
+  <div class="book-and-plant"></div>
+</div>
 
 <h1>Risk Factor</h1>
 <h2 id="Day">Day 1</h2>
@@ -30,6 +175,8 @@ const statusElement = document.getElementById("status");
 const symptomList = document.getElementById("symptom-list");
 const homeButton = document.getElementById("homeButton");
 const hospitalButton = document.getElementById("hospitalButton");
+const badLayer = document.getElementById("badLayer");
+const goodLayer = document.getElementById("goodLayer");
 
 function CurrentSymptoms() {
     const currentSymptoms = symptoms[PersonNumber];
@@ -87,7 +234,7 @@ function handleChoice(choice) {
     dayElement.innerText = `Day ${day}`;
     scoreElement.innerText = `Score: ${score}`;
     if (PersonNumber + 1 >= symptoms.length) {
-        if (score >= 7) {
+        if (score > 8) {
             showResult("You Saved Everyone!");
             setTimeout(() => loadSymptomsForDay(day + 1), 1000);
         }
