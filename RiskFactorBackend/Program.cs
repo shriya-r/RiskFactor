@@ -1,3 +1,5 @@
+using RiskFactorBackend;
+
 var builder = WebApplication.CreateBuilder(args);
 
 var app = builder.Build();
@@ -5,9 +7,17 @@ var app = builder.Build();
 app.UseDefaultFiles();
 app.UseStaticFiles();
 
-app.MapGet("/api/message", () =>
-{
-    return new { text = "Hello from backend" };
-});
+var symptomBank = new SymptomBank();
+var generateDay = new GenerateDay(symptomBank);
 
+app.MapGet("/api/message", (HttpRequest req) =>
+{
+    var dayQuery = req.Query["day"].FirstOrDefault();
+    int Day = 1;
+    if (!string.IsNullOrEmpty(dayQuery) && int.TryParse(dayQuery, out var parsedDay))
+    {
+        Day = parsedDay;
+    }
+    return generateDay.Symptoms(Day);
+});
 app.Run();

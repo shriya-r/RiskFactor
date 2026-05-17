@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("RiskFactorBackend")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0792492b198e2f39b11850f8835c997ea757318b")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+071616189fffbec4827974c065981d274fc017ae")]
 [assembly: System.Reflection.AssemblyProductAttribute("RiskFactorBackend")]
 [assembly: System.Reflection.AssemblyTitleAttribute("RiskFactorBackend")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
