@@ -1,46 +1,405 @@
+# Risk Factor
+
 ## Inspiration
-We were inspired to create Risk Factor after seeing how dangerous medical symptoms can sometimes be overlooked or dismissed. One personal inspiration came from my grandmother, who had heart disease and went to the hospital after experiencing concerning symptoms. She was told it was okay for her to go home, and it turned out that her condition was serious. That experience showed us how difficult and important medical decisions can be.
+
+We were inspired to create **Risk Factor** after seeing how dangerous medical symptoms can sometimes be overlooked or dismissed. One personal inspiration came from a family experience involving heart disease, where concerning symptoms were initially underestimated before becoming much more serious. That experience showed us how difficult and important medical decisions can be.
+
 We also wanted to raise awareness about postpartum complications and the challenges pregnant women face when warning signs are mistaken for normal pregnancy or recovery symptoms. Many dangerous symptoms can appear subtle at first, which makes early recognition extremely important.
 
-## What It Does
-Risk Factor is a postpartum triage simulation game where players decide whether patients should be sent to the hospital or safely sent home. We created this project so that women who should be aware of the risks would have a fun game to play that simultaneously taught them the symptoms and factors they should be aware of. This game provides a stress-free method of learning the concerns while also being a fun game to play, which may help raise awareness more than just reading a brochure.
-Each patient arrives with randomized symptoms, dialogue, and risk factors. The game becomes harder over multiple days as more symptoms and risk factors are introduced. We increase the number of symptoms and factors that they need to consider each level (or day) so that users can slowly learn the symptoms by memorizing them in smaller segments.
-Players must identify dangerous cases using clues such as:
-* High priority symptoms
-* Medium priority symptoms
-* Medical risk factors
-* Unrelated symptoms meant to distract the player
+Our goal was to create a game that is both educational and engaging — helping players learn warning signs through gameplay instead of simply reading informational material.
 
-## How We Built It
-We organized symptoms into categories (High Priority, Medium Priority, Risk Factors, Non-Risk Factors, Unrelated Symptoms). Patients are procedurally generated using weighted probabilities. Healthy patients mostly receive harmless symptoms, while dangerous patients receive combinations of symptoms and risk factors. We also ensured that the healthy and unhealthy patients would be generated randomly so that the user would have to learn the symptoms to win the game. We also created multiple dialogue variations for symptoms to make conversations feel more realistic and less repetitive. We ensured that players would only win and move onto the next level if they correctly sorted the patients between who needed the hospital and who could go home. If the user sent a patient home when they needed medical attention, they immediately lose the game. If the user sent a healthy patient to the hospital, then there is a little bit of room for error but they lose points because we wanted to also mention the issue of hospital overcrowding. By correctly sorting the patients that come in for the day, the user can move onto the next level and sort patients with a wider range of symptoms.
+---
 
-The game includes:
-* Progressive difficulty by level
-* A point-based triage system
-* Win/loss conditions based on hospital overcrowding and saved patients
-* ASP.NET API to connect the backend to the frontend
-* HTML/CSS/JS to create a dynamic application
-* Figma to create an interactive and engaging UI
-* C# to program the backend with randomized patient generation
+# What It Does
 
-## Challenges
-One challenge was ensuring that all of our medical information and warning signs were accurate. We researched postpartum symptoms and risk factors using data from the California Department of Public Health’s Maternal, Child, and Adolescent Health resources.
-Another challenge was deciding how to classify symptoms and risk factors into categories like high priority, medium priority, and unrelated symptoms while still keeping the game balanced and educational.
-We also had difficulty integrating the front-end HTML and Figma-based interface with the JavaScript gameplay systems that were developed separately. Connecting the UI with the randomized patient generation and scoring logic required a lot of debugging and restructuring.
+Risk Factor is a postpartum triage simulation game where players decide whether patients should be:
 
-## Accomplishments
-We are proud of creating a system that combines education and gameplay in a meaningful way. The randomized symptom generator makes every playthrough different, and the dialogue system helps patients feel more realistic.
-We are also proud of designing a progression system that gradually teaches players how to recognize increasingly complex symptom combinations.
+* Sent to the Hospital
+* Safely sent Home
 
-## What We Learned
-We learned how to integrate a C# backend with out HTML/CSS/JS frontend and learned how to use ASP.NET to create an API for our backend that could be called by our frontend. We also learned a lot about balancing educational gameplay. Introducing symptoms gradually across multiple in-game days made the game easier to learn without overwhelming players.
+Each patient arrives with randomized:
 
-## What's Next For Risk Factor
-In the future, we want to add:
+* Symptoms
+* Dialogue
+* Risk factors
+* Unrelated distractions
+
+Players must determine which patients may be experiencing dangerous postpartum complications.
+
+The game gradually increases in difficulty over multiple in-game days. New symptom categories and risk factors are introduced over time so players can learn warning signs progressively instead of being overwhelmed all at once.
+
+The game teaches players to identify:
+
+* **High Priority Symptoms**
+* **Medium Priority Symptoms**
+* **Medical Risk Factors**
+* **Unrelated Symptoms** meant to distract the player
+
+---
+
+# Gameplay
+
+## Daily Structure
+
+Each day:
+
+* 10 patients arrive
+* Players review their symptoms and dialogue
+* Players choose:
+
+  * Send to Hospital
+  * Send Home
+
+At the beginning of each day, newly introduced symptoms and categories are explained to the player.
+
+---
+
+# Win & Loss Conditions
+
+## Points
+
+* Correct decision: **+1 point**
+* Sending a healthy patient to the hospital: **-2 points**
+* Sending a critical patient home: **Immediate Loss**
+
+## Winning
+
+* Reach 7 points or higher by the end of the day
+
+## Losing
+
+Players lose if:
+
+* They send home a patient in critical condition
+* Their score falls below the passing threshold
+
+If too many unnecessary hospital visits occur, the game displays: “Hospital Overcrowded”
+
+---
+
+# Difficulty Progression
+
+## Day 1
+
+Introduces:
+
+* Concept of High Priority symptoms
+* 2 High Priority symptoms
+
+## Day 2
+
+Introduces:
+
+* Medium Priority symptoms
+* 2 more High Priority symptoms
+* 3 Medium Priority symptoms
+
+## Day 3
+
+Introduces:
+
+* Risk Factors
+* Remaining High Priority symptoms
+* 3 more Medium Priority symptoms
+* 2 Risk Factors
+
+## Day 4
+
+Introduces:
+
+* 3 more Medium Priority symptoms
+* 3 more Risk Factors
+
+## Day 5
+
+Introduces:
+
+* Remaining symptoms and factors
+* Full difficulty gameplay
+* Timer to ensure decisions are made quickly
+
+---
+
+# Symptoms & Categories
+
+## High Priority Symptoms
+
+These symptoms generally require immediate medical attention.
+
+Examples:
+
+* Trouble breathing
+* Chest pain
+* Heart rate above 100 BPM
+* Extreme swelling
+* Dizziness or fainting
+* High blood pressure
+
+### Example Dialogue
+
+* “This morning, I got out of bed, and I felt like I could barely breathe!”
+* “My chest feels really tight right now.”
+* “I measured my heart rate, and it was 140 bpm.”
+* “I fainted earlier today.”
+
+---
+
+## Medium Priority Symptoms
+
+These symptoms may indicate developing complications and should be monitored carefully.
+
+Examples:
+
+* Extreme tiredness
+* Persistent coughing
+* Rapid weight gain
+* Headaches
+* Nausea
+* Blurred vision
+* Trouble sleeping
+* Weakness
+* Neck, or back pain
+* Cold sweats
+
+### Example Dialogue
+
+* “I feel super tired, I can barely keep my eyes open.”
+* “Koff-koff! I’ve been coughing for the past few weeks!”
+* “My vision sometimes gets really blurry for a few seconds.”
+
+---
+
+## Risk Factors
+
+These factors increase the likelihood of postpartum complications.
+
+Examples:
+
+* Family history of heart disease or hypertension
+* Over 40 years old
+* Limited access to prenatal care
+* Smoking, alcohol, or drug use
+* Premature birth
+* Multiple births
+* Limited access to healthy food
+
+### Example Dialogue
+
+* “I have a family history of hypertension.”
+* “I smoke every so often.”
+* “I haven’t attended a prenatal appointment yet.”
+
+---
+
+## Non-Risk Factors
+
+These are healthy or neutral indicators meant to balance gameplay.
+
+Examples:
+
+* Regular exercise
+* Healthy eating
+* No smoking or drug use
+* Attending prenatal appointments
+* Young age
+
+### Example Dialogue
+
+* “I usually hit the gym every day.”
+* “I regularly attend my prenatal appointments.”
+* “I don’t smoke or drink.”
+
+---
+
+## Unrelated Symptoms
+
+These symptoms are included to distract players and simulate realistic patient conversations.
+
+Examples:
+
+* Sneezing
+* Acne
+* Rash
+* Tooth pain
+* Mild bruises
+* Mood swings
+* Constipation
+
+### Example Dialogue
+
+* “My allergies are acting up.”
+* “I have a tooth ache.”
+* “I got a paper cut.”
+
+---
+
+# Core Rules
+
+Patients should be sent to the hospital if they have:
+
+## 1. A High Priority Symptom
+
+Example:
+
+* Chest pain
+* Trouble breathing
+
+## 2. One Risk Factor + One Medium Priority Symptom
+
+Example:
+
+* Family history of hypertension
+* Persistent headaches
+
+## 3. Three Medium Priority Symptoms
+
+Example:
+
+* Trouble sleeping
+* Nausea
+* Weakness
+
+---
+
+# Procedural Patient Generation
+
+The game uses weighted random generation to create realistic patients.
+
+## Healthy Patients
+
+Symptoms:
+
+* 30% chance of Non-Risk Factors
+* 70% chance of Unrelated Symptoms
+
+---
+
+## Unhealthy Patients
+
+The game randomly selects one of three dangerous patient types:
+
+### Type 1 — High Priority
+
+Includes:
+
+* 1 guaranteed High Priority symptom
+
+Additional symptoms may include:
+
+* More High Priority symptoms
+* Medium symptoms
+* Risk factors
+* Unrelated symptoms
+
+---
+
+### Type 2 — Risk Factor + Medium Symptom
+
+Includes:
+
+* 1 Risk Factor
+* 1 Medium Priority symptom
+
+Additional symptoms may include:
+
+* More Medium symptoms
+* More Risk factors
+* Unrelated symptoms
+
+---
+
+### Type 3 — Three Medium Symptoms
+
+Includes:
+
+* 3 guaranteed Medium Priority symptoms
+
+Additional symptoms:
+
+* Mostly unrelated or non-risk symptoms
+
+---
+
+# Technical Details
+
+## Built With
+
+* **ASP.NET API**
+* **C#**
+* **HTML**
+* **CSS**
+* **JavaScript**
+* **Figma**
+
+---
+
+# How We Built It
+
+We organized symptoms into several categories:
+
+* High Priority
+* Medium Priority
+* Risk Factors
+* Non-Risk Factors
+* Unrelated Symptoms
+
+Patients are procedurally generated using weighted probabilities. Healthy patients mostly receive harmless symptoms, while dangerous patients receive combinations that require careful decision-making.
+
+We also:
+
+* Added multiple dialogue variations for realism
+* Created a progressive learning system
+* Connected a C# backend API to the frontend
+* Built randomized gameplay systems
+
+---
+
+# Challenges
+
+Some major challenges included:
+
+* Researching medically accurate postpartum symptoms
+* Properly balancing educational gameplay
+* Categorizing symptoms appropriately
+* Integrating frontend systems with backend APIs
+* Connecting randomized patient generation with UI logic
+
+We used resources from the California Department of Public Health’s Maternal, Child, and Adolescent Health resources to improve accuracy.
+
+---
+
+# Accomplishments
+
+We are proud of:
+
+* Combining education with gameplay
+* Building a procedural dialogue system
+* Designing progressive difficulty
+* Creating replayable randomized scenarios
+* Raising awareness about postpartum complications
+
+---
+
+# What We Learned
+
+During development, we learned:
+
+* How to integrate ASP.NET APIs with frontend systems
+* How to use C# for procedural gameplay generation
+* How to structure scalable randomized systems
+* How to balance educational content with fun gameplay
+
+---
+
+# Future Plans
+
+We plan to add:
+
 * More symptom dialogue variations
 * Dynamic patient reactions
 * Difficulty modes
 * Audio and voice acting
 * Additional postpartum complications
 * More advanced AI-driven patient behavior
-We also want to expand the educational aspect of the game while keeping it engaging and enjoyable.
+
+We also want to continue improving the educational side of the game while keeping it engaging and approachable.
