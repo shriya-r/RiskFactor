@@ -440,11 +440,12 @@
         function CurrentSymptoms() {
             const currentSymptoms = symptoms[PersonNumber];
             person.innerText = names[PersonNumber];
-            var newBackground = randomBackground();
-            while (newBackground === document.querySelector('.background').src) {
+            const currBackground = document.querySelector('.background');
+            let newBackground = randomBackground();
+            while (currBackground.src.includes(newBackground)) {
                 newBackground = randomBackground();
             }
-            document.querySelector('.background').src = newBackground;
+            currBackground.src = newBackground;
             symptomList.innerHTML = "";
             for (let i = 1; i < currentSymptoms.length; i++) {
                 const li = document.createElement("li");
