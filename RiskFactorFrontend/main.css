@@ -1,0 +1,70 @@
+/* The main canvas wrapper */
+.frame-1 {
+  position: relative;
+  width: 4096px;
+  height: 3277px;
+}
+
+/* Individual layers stacking on top of each other */
+.background {
+  position: absolute;
+  width: 4096px;
+  height: 3277px;
+  left: 0px;
+  top: 0px;
+  background: url('BACKGROUND.jpg');
+}
+
+.bad {
+  position: absolute;
+  width: 4096px;
+  height: 3277px;
+  left: 0px;
+  top: -8.5px;
+  background: url('BAD.png');
+}
+
+.good {
+  position: absolute;
+  width: 4096px;
+  height: 3277px;
+  left: 0px;
+  top: -8.5px;
+  background: url('GOOD.png');
+}
+
+.patient-file {
+  position: absolute;
+  width: 4096px;
+  height: 3277px;
+  left: 0px;
+  top: 0.5px;
+  background: url('PATIENT_FILE.png');
+}
+
+.score {
+  position: absolute;
+  width: 4096px;
+  height: 3277px;
+  left: 0px;
+  top: -8.5px;
+  background: url('SCORE.png');
+}
+
+.tool-box {
+  position: absolute;
+  width: 4096px;
+  height: 3277px;
+  left: 0px;
+  top: 0.5px;
+  background: url('TOOL_BOX.png');
+}
+
+.book-and-plant {
+  position: absolute;
+  width: 4096px;
+  height: 3277px;
+  left: 0px;
+  top: 0.5px;
+  background: url('BOOK_AND_PLANT.png');
+}
