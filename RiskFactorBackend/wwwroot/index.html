@@ -4,11 +4,15 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Risk Factor</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet" />
     <style>
       * {
         margin: 0;
         padding: 0;
         box-sizing: border-box;
+        font-family: "Nunito", sans-serif;
       }
       html,
       body {
@@ -121,11 +125,31 @@
       h2,
       p {
         position: relative;
-        margin: 10px 0;
+        font-family: "Nunito", sans-serif;
         color: white;
-        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+        text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.9);
         z-index: 30;
         pointer-events: none;
+        margin: 10px 0;
+      }
+
+      h1 {
+        font-size: 2rem;
+        font-weight: 800;
+        letter-spacing: 0.05em;
+        padding-left: 16px;
+        padding-top: 8px;
+      }
+
+      h2 {
+        font-size: 1.4rem;
+        font-weight: 600;
+        padding-left: 16px;
+      }
+
+      p {
+        font-size: 1.3rem;
+        font-weight: 700;
       }
 
       #homeButton {
