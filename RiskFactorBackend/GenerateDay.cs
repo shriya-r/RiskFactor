@@ -109,6 +109,16 @@ public class GenerateDay {
         return people.OrderBy(_ => _random.Next()).ToList();
     }
 
+    public Dictionary<string, List<string>> SymptomList(int day) {
+        int d = Math.Clamp(day, 1, dayAvails.Keys.Max());
+        var avails = dayAvails[d];
+        return new Dictionary<string, List<string>> {
+            ["high_priority"]   = _bank.GetRange(SymptomPriority.HighPriority,   0, avails[SymptomPriority.HighPriority])  .Select(s => s.Name).ToList(),
+            ["medium_priority"] = _bank.GetRange(SymptomPriority.MediumPriority, 0, avails[SymptomPriority.MediumPriority]).Select(s => s.Name).ToList(),
+            ["risk_factor"]     = _bank.GetRange(SymptomPriority.RiskFactor,     0, avails[SymptomPriority.RiskFactor])    .Select(s => s.Name).ToList(),
+        };
+    }
+
     public string DayInfo(int day) {
         string info = $"=== DAY {day}: ===\n";
         switch (day) {
@@ -143,4 +153,5 @@ public class GenerateDay {
         info += symptomInfo.Length > 0 ? symptomInfo : "No new information. Let's get to treating!";
         return info;
     }
+
 }

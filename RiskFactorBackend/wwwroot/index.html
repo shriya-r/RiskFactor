@@ -164,6 +164,32 @@
         padding-top: 130px;
       }
 
+      .panel-symptom-list {
+        position: absolute;
+        width: 1281px;
+        overflow-y: auto;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+        display: none;
+        z-index: 26;
+        padding: 80px 90px 60px 90px;
+        box-sizing: border-box;
+      }
+
+      .panel-symptom-list::-webkit-scrollbar { display: none; }
+
+      .panel-symptom-list ul {
+        list-style: none;
+      }
+
+      .panel-symptom-list li {
+        font-size: 72px;
+        font-weight: 700;
+        color: black;
+        margin-bottom: 40px;
+        line-height: 1.3;
+      }
+
       .symptoms {
         position: absolute;
         width: 3120px;
@@ -194,7 +220,8 @@
       .medium-priority.visible,
       .risk-factor.visible,
       .exit-book.visible,
-      .panel-label.visible {
+      .panel-label.visible,
+      .panel-symptom-list.visible {
         display: block;
       }
 
@@ -353,15 +380,12 @@
       <img class="high-priority" src="assets/HIGH_PRIORITY.png" alt="" />
       <img class="medium-priority" src="assets/HIGH_PRIORITY.png" alt="" />
       <img class="risk-factor" src="assets/HIGH_PRIORITY.png" alt="" />
-      <div class="panel-label" style="left: 1416px; top: 354.5px">
-        HIGH PRIORITY
-      </div>
-      <div class="panel-label" style="left: 2741px; top: 354.5px">
-        MEDIUM PRIORITY
-      </div>
-      <div class="panel-label" style="left: 95px; top: 363.5px">
-        RISK FACTOR
-      </div>
+      <div class="panel-label" style="left: 1416px; top: 354.5px">HIGH PRIORITY</div>
+      <div class="panel-label" style="left: 2741px; top: 354.5px">MEDIUM PRIORITY</div>
+      <div class="panel-label" style="left: 95px;   top: 363.5px">RISK FACTOR</div>
+      <div class="panel-symptom-list" id="high-priority-list"   style="left:1416px; top:640px; height:2100px;"><ul></ul></div>
+      <div class="panel-symptom-list" id="medium-priority-list" style="left:2741px; top:640px; height:2100px;"><ul></ul></div>
+      <div class="panel-symptom-list" id="risk-factor-list"     style="left:95px;   top:649px; height:2100px;"><ul></ul></div>
       <div class="exit-book"></div>
       <img class="symptoms" src="assets/SYMPTOMS.png" alt="" />
       <div class="exit-symptoms"></div>
@@ -460,6 +484,16 @@
         .querySelector(".symptoms")
         .addEventListener("click", closeSymptoms);
 
+      function populatePanelList(id, names) {
+        const ul = document.querySelector(`#${id} ul`);
+        ul.innerHTML = "";
+        (names || []).forEach((name) => {
+          const li = document.createElement("li");
+          li.innerText = name;
+          ul.appendChild(li);
+        });
+      }
+
       document
         .querySelector(".book-and-plant")
         .addEventListener("click", function () {
@@ -469,9 +503,8 @@
           document.querySelector(".medium-priority").classList.add("visible");
           document.querySelector(".risk-factor").classList.add("visible");
           document.querySelector(".exit-book").classList.add("visible");
-          document
-            .querySelectorAll(".panel-label")
-            .forEach((el) => el.classList.add("visible"));
+          document.querySelectorAll(".panel-label").forEach((el) => el.classList.add("visible"));
+          document.querySelectorAll(".panel-symptom-list").forEach((el) => el.classList.add("visible"));
         });
 
       function closeBook() {
@@ -481,9 +514,8 @@
         document.querySelector(".medium-priority").classList.remove("visible");
         document.querySelector(".risk-factor").classList.remove("visible");
         document.querySelector(".exit-book").classList.remove("visible");
-        document
-          .querySelectorAll(".panel-label")
-          .forEach((el) => el.classList.remove("visible"));
+        document.querySelectorAll(".panel-label").forEach((el) => el.classList.remove("visible"));
+        document.querySelectorAll(".panel-symptom-list").forEach((el) => el.classList.remove("visible"));
       }
 
       document.querySelector(".exit-book").addEventListener("click", closeBook);
@@ -606,6 +638,14 @@
         symptoms = [];
         dayElement.innerText = `Day ${day}`;
         scoreElement.innerText = `Score: ${score}`;
+
+        fetch(`/api/symptoms?day=${day}`)
+          .then((r) => r.json())
+          .then((data) => {
+            populatePanelList("high-priority-list",   data.high_priority);
+            populatePanelList("medium-priority-list", data.medium_priority);
+            populatePanelList("risk-factor-list",     data.risk_factor);
+          });
 
         fetch(`/api/dayinfo?day=${day}`)
           .then((r) => r.text())
