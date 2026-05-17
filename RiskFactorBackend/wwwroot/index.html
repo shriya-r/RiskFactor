@@ -1,16 +1,21 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Risk Factor</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet" />
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            font-family: "Nunito", sans-serif;
         }
+
         html,
         body {
             width: 100%;
@@ -18,6 +23,7 @@
             overflow: hidden;
             background: #000;
         }
+
         .frame-1 {
             position: absolute;
             width: 4096px;
@@ -26,6 +32,7 @@
             top: 0;
             left: 0;
         }
+
         .background {
             position: absolute;
             width: 4096px;
@@ -33,6 +40,7 @@
             left: 0px;
             top: 0px;
         }
+
         .tool-box {
             position: absolute;
             width: 1612px;
@@ -40,6 +48,7 @@
             left: 127px;
             top: 1813.5px;
         }
+
         .bad {
             position: absolute;
             width: 213px;
@@ -48,6 +57,7 @@
             top: 1972.5px;
             cursor: pointer;
         }
+
         .good {
             position: absolute;
             width: 216px;
@@ -56,6 +66,7 @@
             top: 1971.5px;
             cursor: pointer;
         }
+
         .patient-file {
             position: absolute;
             width: 457px;
@@ -72,6 +83,7 @@
             left: 3188px;
             top: 480.5px;
         }
+
         #score {
             position: absolute;
             top: 17%;
@@ -101,6 +113,7 @@
             display: none;
             z-index: 20;
         }
+
         .exit-symptoms {
             position: absolute;
             width: 173px;
@@ -110,48 +123,141 @@
             cursor: pointer;
             display: none;
             z-index: 50;
-            background-image: url('assets/EXIT_SYMPTOMS.png');
+            background-image: url("assets/EXIT_SYMPTOMS.png");
             background-size: contain;
             background-repeat: no-repeat;
         }
+
         .symptoms.visible,
         .exit-symptoms.visible {
             display: block;
         }
+
         h1,
         h2,
         p {
             position: relative;
-            margin: 10px 0;
+            font-family: "Nunito", sans-serif;
             color: white;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+            text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.9);
             z-index: 30;
             pointer-events: none;
+            margin: 10px 0;
+        }
+
+        h1 {
+            font-size: 2rem;
+            font-weight: 800;
+            letter-spacing: 0.05em;
+            padding-left: 16px;
+            padding-top: 8px;
+        }
+
+        h2 {
+            font-size: 1.4rem;
+            font-weight: 600;
+            padding-left: 16px;
+        }
+
+        p {
+            font-size: 1.3rem;
+            font-weight: 700;
         }
 
         #homeButton {
             background: green;
         }
+
         #hospitalButton {
             background: red;
         }
 
-        #symptom-list {
-            position: relative;
-            list-style: none;
-            font-size: 24px;
-            font-weight: bold;
-            color: black;
-            z-index: 40;
+        #symptom-list-container {
+            position: absolute;
+            left: 720px;
+            top: 335.5px;
+            width: 2600px;
+            padding-right: 200px;
+            height: 2589px;
             display: none;
-            margin-top: -40px;
-            margin-left: 400px;
-            width: 500px;
+            flex-direction: column;
+            justify-content: flex-start;
+            padding-top: 250px;
+            z-index: 40;
             pointer-events: none;
         }
-        #symptom-list li {
-            margin-bottom: 5px;
+
+        #symptom-list-container.visible {
+            display: flex;
         }
+
+        #symptom-list {
+            list-style: none;
+            font-size: 110px;
+            font-weight: bold;
+            color: black;
+        }
+
+        #symptom-list li {
+            margin-bottom: 60px;
+        }
+
+        #day-info-bg {
+            position: absolute;
+            width: 3120px;
+            height: 2589px;
+            left: 488px;
+            top: 335.5px;
+            display: none;
+            z-index: 70;
+        }
+
+        #day-info-exit {
+            position: absolute;
+            width: 173px;
+            height: 170px;
+            left: 3273px;
+            top: 480.5px;
+            cursor: pointer;
+            display: none;
+            z-index: 90;
+            background-image: url("assets/EXIT_SYMPTOMS.png");
+            background-size: contain;
+            background-repeat: no-repeat;
+        }
+
+        #day-info-text-container {
+            position: absolute;
+            left: 720px;
+            top: 535px;
+            width: 2500px;
+            height: 2200px;
+            overflow-y: auto;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+            display: none;
+            z-index: 80;
+            padding-right: 200px;
+        }
+
+        #day-info-text-container::-webkit-scrollbar {
+            display: none;
+        }
+
+        #day-info-text {
+            white-space: pre-wrap;
+            font-size: 90px;
+            font-weight: bold;
+            color: #222;
+            line-height: 1.6;
+        }
+
+        #day-info-bg.visible,
+        #day-info-exit.visible,
+        #day-info-text-container.visible {
+            display: block;
+        }
+
         #status {
             position: absolute;
             top: 25%;
@@ -162,6 +268,10 @@
             color: yellow;
             text-shadow: 4px 4px 8px rgba(0, 0, 0, 0.9);
             z-index: 60;
+        }
+
+        body.popup-open>#score {
+            visibility: hidden;
         }
     </style>
 </head>
@@ -177,50 +287,106 @@
         <img class="book-and-plant" src="assets/BOOK_AND_PLANT.png" alt="" />
         <img class="symptoms" src="assets/SYMPTOMS.png" alt="" />
         <div class="exit-symptoms"></div>
+        <div id="symptom-list-container">
+            <ul id="symptom-list"></ul>
+        </div>
+        <img id="day-info-bg" src="assets/SYMPTOMS.png" alt="" />
+        <div id="day-info-exit"></div>
+        <div id="day-info-text-container">
+            <div id="day-info-text"></div>
+        </div>
     </div>
 
     <h1>Risk Factor</h1>
     <h2 id="Day">Day 1</h2>
     <h2 id="Person">Loading person...</h2>
-    <h2 id="status" style="display:none;"></h2>
+    <h2 id="status" style="display: none"></h2>
     <p id="score">Score: 0</p>
     <ul id="symptom-list"></ul>
 
     <script>
-
         function scale() {
             const s = Math.min(window.innerWidth / 4096, window.innerHeight / 3277);
             const x = (window.innerWidth - 4096 * s) / 2;
             const y = (window.innerHeight - 3277 * s) / 2;
-            document.querySelector('.frame-1').style.transform = `translate(${x}px, ${y}px) scale(${s})`;
+            document.querySelector(".frame-1").style.transform =
+                `translate(${x}px, ${y}px) scale(${s})`;
         }
         scale();
-        window.addEventListener('resize', scale);
+        window.addEventListener("resize", scale);
 
-        document.querySelector('.patient-file').addEventListener('click', function () {
-            document.querySelector('.symptoms').classList.add('visible');
-            document.querySelector('.exit-symptoms').classList.add('visible');
-            document.getElementById('symptom-list').style.display = 'block';
-        });
+        document
+            .querySelector(".patient-file")
+            .addEventListener("click", function () {
+                document.body.classList.add("popup-open");
+                document.querySelector(".symptoms").classList.add("visible");
+                document.querySelector(".exit-symptoms").classList.add("visible");
+                document
+                    .getElementById("symptom-list-container")
+                    .classList.add("visible");
+            });
 
         function closeSymptoms() {
-            document.querySelector('.symptoms').classList.remove('visible');
-            document.querySelector('.exit-symptoms').classList.remove('visible');
-            document.getElementById('symptom-list').style.display = 'none';
+            document.body.classList.remove("popup-open");
+            document.querySelector(".symptoms").classList.remove("visible");
+            document.querySelector(".exit-symptoms").classList.remove("visible");
+            document
+                .getElementById("symptom-list-container")
+                .classList.remove("visible");
         }
 
-        document.querySelector('.exit-symptoms').addEventListener('click', closeSymptoms);
-        document.querySelector('.symptoms').addEventListener('click', closeSymptoms);
+        document
+            .querySelector(".exit-symptoms")
+            .addEventListener("click", closeSymptoms);
+        document
+            .querySelector(".symptoms")
+            .addEventListener("click", closeSymptoms);
 
-
-        const firstNames = ["Shriya", "Alana", "Rebecca", "Maria", "Priya", "Jordan", "Taylor", "Carmen", "Destiny", "Fatima", "Mei", "Aaliyah", "Sofia", "Nadia", "Layla"];
-        const lastNames = ["Rajesh", "Zhao", "Tio", "Johnson", "Williams", "Patel", "Nguyen", "Martinez", "Brown", "Kim", "Okafor", "Hassan", "Rivera", "Chen", "Thompson"];
+        const firstNames = [
+            "Shriya",
+            "Alana",
+            "Rebecca",
+            "Maria",
+            "Priya",
+            "Jordan",
+            "Taylor",
+            "Carmen",
+            "Destiny",
+            "Fatima",
+            "Mei",
+            "Aaliyah",
+            "Sofia",
+            "Nadia",
+            "Layla",
+        ];
+        const lastNames = [
+            "Rajesh",
+            "Zhao",
+            "Tio",
+            "Johnson",
+            "Williams",
+            "Patel",
+            "Nguyen",
+            "Martinez",
+            "Brown",
+            "Kim",
+            "Okafor",
+            "Hassan",
+            "Rivera",
+            "Chen",
+            "Thompson",
+        ];
         let names = [];
 
         function randomName() {
             const first = firstNames[Math.floor(Math.random() * firstNames.length)];
             const last = lastNames[Math.floor(Math.random() * lastNames.length)];
             return `${first} ${last}`;
+        }
+
+        function randomBackground() {
+            const backgrounds = ['assets/BACKGROUND.jpg', 'assets/background_1.png'];
+            return backgrounds[Math.floor(Math.random() * backgrounds.length)];
         }
 
         let symptoms = [];
@@ -241,10 +407,11 @@
         function CurrentSymptoms() {
             const currentSymptoms = symptoms[PersonNumber];
             person.innerText = names[PersonNumber];
+            document.querySelector('.background').src = randomBackground();
             symptomList.innerHTML = "";
             for (let i = 1; i < currentSymptoms.length; i++) {
                 const li = document.createElement("li");
-                li.innerText = `${i}. ${currentSymptoms[i]}`;
+                li.innerText = currentSymptoms[i];
                 symptomList.appendChild(li);
             }
         }
@@ -252,8 +419,26 @@
         function showResult(result) {
             statusElement.innerText = result;
             statusElement.style.display = "block";
-            setTimeout(() => { statusElement.style.display = "none"; }, 1000);
+            setTimeout(() => {
+                statusElement.style.display = "none";
+            }, 1000);
         }
+
+        const dayInfoBg = document.getElementById("day-info-bg");
+        const dayInfoExit = document.getElementById("day-info-exit");
+        const dayInfoContainer = document.getElementById(
+            "day-info-text-container",
+        );
+        const dayInfoText = document.getElementById("day-info-text");
+
+        function closeDayInfo() {
+            document.body.classList.remove("popup-open");
+            dayInfoBg.classList.remove("visible");
+            dayInfoExit.classList.remove("visible");
+            dayInfoContainer.classList.remove("visible");
+        }
+
+        dayInfoExit.addEventListener("click", closeDayInfo);
 
         function DaySymptoms(requestedDay) {
             day = requestedDay;
@@ -262,9 +447,21 @@
             symptoms = [];
             dayElement.innerText = `Day ${day}`;
             scoreElement.innerText = `Score: ${score}`;
+
+            fetch(`/api/dayinfo?day=${day}`)
+                .then((r) => r.text())
+                .then((info) => {
+                    dayInfoText.innerText = info;
+                    dayInfoContainer.scrollTop = 0;
+                    document.body.classList.add("popup-open");
+                    dayInfoBg.classList.add("visible");
+                    dayInfoExit.classList.add("visible");
+                    dayInfoContainer.classList.add("visible");
+                });
+
             fetch(`/api/message?day=${day}`)
-                .then(response => response.json())
-                .then(data => {
+                .then((response) => response.json())
+                .then((data) => {
                     symptoms = data;
                     names = symptoms.map(() => randomName());
                     CurrentSymptoms();
@@ -283,8 +480,7 @@
                     return;
                 }
                 score += 1;
-            }
-            else if (choice === "Hospital") {
+            } else if (choice === "Hospital") {
                 if (health === "Healthy") {
                     score -= 2;
                     if (score < 0) score = 0;
@@ -298,8 +494,7 @@
                 if (score > 8) {
                     showResult("You Saved Everyone!");
                     setTimeout(() => DaySymptoms(day + 1), 1000);
-                }
-                else {
+                } else {
                     showResult("The Hospital Was Overcrowded.");
                     setTimeout(() => DaySymptoms(1), 1000);
                 }
@@ -311,7 +506,6 @@
         homeButton.addEventListener("click", () => UpdateScore("Home"));
         hospitalButton.addEventListener("click", () => UpdateScore("Hospital"));
         DaySymptoms(day);
-
     </script>
 </body>
 

@@ -28,7 +28,7 @@ public class SymptomBank
                         "Yesterday, I struggled with breathing after just a short walk.",
                     }),
                 new Symptom("Chest pain",
-                    "Women are less likely to experience sharp chest pain — instead it may feel like pressure, squeezing, or tightness. Any chest discomfort during or after pregnancy should be taken seriously and evaluated immediately.",
+                    "Women are less likely to experience sharp chest pain - instead it may feel like pressure, squeezing, or tightness. Any chest discomfort during or after pregnancy should be taken seriously and evaluated immediately.",
                     new [] {
                         "My chest hurts a lot.",
                         "My chest feels really tight right now.",
@@ -61,7 +61,7 @@ public class SymptomBank
             [SymptomPriority.MediumPriority] = new()
             {
                 new Symptom("Overwhelming tiredness",
-                    "While fatigue is common postpartum, cardiac-related tiredness feels different — sudden, extreme, and described as 'hitting a wall' even without physical exertion. Women are more likely than men to experience fatigue as a primary cardiac symptom.",
+                    "While fatigue is common postpartum, cardiac-related tiredness feels different - sudden, extreme, and described as 'hitting a wall' even without physical exertion. Women are more likely than men to experience fatigue as a primary cardiac symptom.",
                     new [] {
                         "I feel super tired, I can barely keep my eyes open.",
                     }),
@@ -71,7 +71,7 @@ public class SymptomBank
                         "Koff-koff! I've been coughing for the past few weeks!",
                     }),
                 new Symptom("Unusual weight gain",
-                    "Rapid unexplained weight gain — such as several pounds in a few days — can signal fluid retention caused by a struggling heart. This is distinct from normal postpartum weight fluctuation and should be monitored closely.",
+                    "Rapid unexplained weight gain - such as several pounds in a few days - can signal fluid retention caused by a struggling heart. This is distinct from normal postpartum weight fluctuation and should be monitored closely.",
                     new [] {
                         "I gained 6lbs in a week.",
                     }),
@@ -102,7 +102,7 @@ public class SymptomBank
                         "I've been feeling weak lately.",
                     }),
                 new Symptom("Trouble sleeping",
-                    "Waking up suddenly short of breath — known as orthopnea — is a specific cardiac warning sign often disguised as general insomnia. If sleep disruption is accompanied by breathlessness or discomfort lying flat, it should be flagged urgently.",
+                    "Waking up suddenly short of breath - known as orthopnea - is a specific cardiac warning sign often disguised as general insomnia. If sleep disruption is accompanied by breathlessness or discomfort lying flat, it should be flagged urgently.",
                     new [] {
                         "I keep waking up in the middle of the night.",
                         "I toss and turn, all night.",
@@ -178,7 +178,7 @@ public class SymptomBank
                         "My baby was born 5 weeks early.",
                     }),
                 new Symptom("Have limited access to healthy meals",
-                    "Poor nutrition — particularly diets high in sodium, saturated fat, and processed foods — contributes to high blood pressure, high cholesterol, and obesity, all of which strain the heart. Nutritional access is a social determinant of health that disproportionately affects lower-income communities.",
+                    "Poor nutrition - particularly diets high in sodium, saturated fat, and processed foods - contributes to high blood pressure, high cholesterol, and obesity, all of which strain the heart. Nutritional access is a social determinant of health that disproportionately affects lower-income communities.",
                     new [] {
                         "I eat fried food basically every day.",
                         "I don't eat much these days.",
