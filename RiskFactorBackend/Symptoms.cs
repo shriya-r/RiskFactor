@@ -225,6 +225,8 @@ public class SymptomBank
 
     public int Count(SymptomPriority priority) => _symptoms[priority].Count;
 
+    public List<Symptom> GetSymptoms(SymptomPriority priority) => _symptoms[priority];
+
     public List<Symptom> GetRange(SymptomPriority priority, int from, int to) =>
         _symptoms[priority].GetRange(from, to - from);
 
