@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Frame</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: #000;
+    }
+
+    .frame-1 {
+      position: absolute;
+      width: 4096px;
+      height: 3277px;
+      transform-origin: 0 0;
+      top: 0;
+      left: 0;
+    }
+
+    .background {
+      position: absolute;
+      width: 4096px;
+      height: 3277px;
+      left: 0px;
+      top: 0px;
+    }
+
+    .tool-box {
+      position: absolute;
+      width: 1612px;
+      height: 1009px;
+      left: 127px;
+      top: 1813.5px;
+    }
+
+    .bad {
+      position: absolute;
+      width: 213px;
+      height: 209px;
+      left: 1801px;
+      top: 1972.5px;
+      cursor: pointer;
+    }
+
+    .good {
+      position: absolute;
+      width: 216px;
+      height: 210px;
+      left: 2076px;
+      top: 1971.5px;
+      cursor: pointer;
+    }
+
+    .patient-file {
+      position: absolute;
+      width: 457px;
+      height: 372px;
+      left: 2606px;
+      top: 2027.5px;
+      cursor: pointer;
+    }
+
+    .score {
+      position: absolute;
+      width: 720px;
+      height: 258px;
+      left: 3188px;
+      top: 480.5px;
+    }
+
+    .book-and-plant {
+      position: absolute;
+      width: 933px;
+      height: 621px;
+      left: 143px;
+      top: 930.5px;
+    }
+
+    .symptoms {
+      position: absolute;
+      width: 3120px;
+      height: 2589px;
+      left: 488px;
+      top: 335.5px;
+      display: none;
+    }
+
+    .exit-symptoms {
+      position: absolute;
+      width: 173px;
+      height: 170px;
+      left: 3273px;
+      top: 480.5px;
+      cursor: pointer;
+      display: none;
+    }
+
+    .symptoms.visible,
+    .exit-symptoms.visible {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <div class="frame-1">
+    <img class="background"     src="assets/BACKGROUND.jpg"    alt="" />
+    <img class="tool-box"       src="assets/TOOL_BOX.png"      alt="" />
+    <img class="bad"            src="assets/BAD.png"            alt="" />
+    <img class="good"           src="assets/GOOD.png"           alt="" />
+    <img class="patient-file"   src="assets/PATIENT_FILE.png"   alt="" />
+    <img class="score"          src="assets/SCORE.png"          alt="" />
+    <img class="book-and-plant" src="assets/BOOK_AND_PLANT.png" alt="" />
+    <img class="symptoms"       src="assets/SYMPTOMS.png"       alt="" />
+    <img class="exit-symptoms"  src="assets/EXIT_SYMPTOMS.png"  alt="" />
+  </div>
+
+  <script>
+    function scale() {
+      const s = Math.min(window.innerWidth / 4096, window.innerHeight / 3277);
+      const x = (window.innerWidth  - 4096 * s) / 2;
+      const y = (window.innerHeight - 3277 * s) / 2;
+      document.querySelector('.frame-1').style.transform = `translate(${x}px, ${y}px) scale(${s})`;
+    }
+
+    scale();
+    window.addEventListener('resize', scale);
+
+    document.querySelector('.patient-file').addEventListener('click', function () {
+      document.querySelector('.symptoms').classList.add('visible');
+      document.querySelector('.exit-symptoms').classList.add('visible');
+    });
+
+    document.querySelector('.exit-symptoms').addEventListener('click', function () {
+      document.querySelector('.symptoms').classList.remove('visible');
+      document.querySelector('.exit-symptoms').classList.remove('visible');
+    });
+  </script>
+</body>
+</html>
