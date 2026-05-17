@@ -1,109 +1,318 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Risk Factor</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background: #000;
+        }
+        .frame-1 {
+            position: absolute;
+            width: 4096px;
+            height: 3277px;
+            transform-origin: 0 0;
+            top: 0;
+            left: 0;
+        }
+        .background {
+            position: absolute;
+            width: 4096px;
+            height: 3277px;
+            left: 0px;
+            top: 0px;
+        }
+        .tool-box {
+            position: absolute;
+            width: 1612px;
+            height: 1009px;
+            left: 127px;
+            top: 1813.5px;
+        }
+        .bad {
+            position: absolute;
+            width: 213px;
+            height: 209px;
+            left: 1801px;
+            top: 1972.5px;
+            cursor: pointer;
+        }
+        .good {
+            position: absolute;
+            width: 216px;
+            height: 210px;
+            left: 2076px;
+            top: 1971.5px;
+            cursor: pointer;
+        }
+        .patient-file {
+            position: absolute;
+            width: 457px;
+            height: 372px;
+            left: 2606px;
+            top: 2027.5px;
+            cursor: pointer;
+        }
+
+        .score {
+            position: absolute;
+            width: 720px;
+            height: 258px;
+            left: 3188px;
+            top: 480.5px;
+        }
+        #score {
+            position: absolute;
+            top: 17%;
+            left: 72%;
+            transform: translate(-50%, -50%);
+            font-size: 25px;
+            font-weight: bold;
+            z-index: 60;
+            color: black;
+            text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.8);
+        }
+
+        .book-and-plant {
+            position: absolute;
+            width: 933px;
+            height: 621px;
+            left: 143px;
+            top: 930.5px;
+        }
+
+        .symptoms {
+            position: absolute;
+            width: 3120px;
+            height: 2589px;
+            left: 488px;
+            top: 335.5px;
+            display: none;
+            z-index: 20;
+        }
+        .exit-symptoms {
+            position: absolute;
+            width: 173px;
+            height: 170px;
+            left: 3273px;
+            top: 480.5px;
+            cursor: pointer;
+            display: none;
+            z-index: 50;
+            background-image: url('assets/EXIT_SYMPTOMS.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+        }
+        .symptoms.visible,
+        .exit-symptoms.visible {
+            display: block;
+        }
+        h1,
+        h2,
+        p {
+            position: relative;
+            margin: 10px 0;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+            z-index: 30;
+            pointer-events: none;
+        }
+
+        #homeButton {
+            background: green;
+        }
+        #hospitalButton {
+            background: red;
+        }
+
+        #symptom-list {
+            position: relative;
+            list-style: none;
+            font-size: 24px;
+            font-weight: bold;
+            color: black;
+            z-index: 40;
+            display: none;
+            margin-top: -40px;
+            margin-left: 400px;
+            width: 500px;
+            pointer-events: none;
+        }
+        #symptom-list li {
+            margin-bottom: 5px;
+        }
+        #status {
+            position: absolute;
+            top: 25%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 48px;
+            font-weight: bold;
+            color: yellow;
+            text-shadow: 4px 4px 8px rgba(0, 0, 0, 0.9);
+            z-index: 60;
+        }
+    </style>
 </head>
+
 <body>
+    <div class="frame-1">
+        <img class="background" src="assets/BACKGROUND.jpg" alt="" />
+        <img class="tool-box" src="assets/TOOL_BOX.png" alt="" />
+        <img class="bad" id="homeButton" src="assets/BAD.png" alt="" />
+        <img class="good" id="hospitalButton" src="assets/GOOD.png" alt="" />
+        <img class="patient-file" src="assets/PATIENT_FILE.png" alt="" />
+        <img class="score" src="assets/SCORE.png" alt="" />
+        <img class="book-and-plant" src="assets/BOOK_AND_PLANT.png" alt="" />
+        <img class="symptoms" src="assets/SYMPTOMS.png" alt="" />
+        <div class="exit-symptoms"></div>
+    </div>
 
-<h1>Risk Factor</h1>
-<h2 id="Day">Day 1</h2>
-<h2 id="Person">Loading person...</h2>
-<h2 id="status" style="display:none;"></h2>
-<p id="score">Score: 0</p>
-<div id="buttons">
-    <button id="homeButton">Home</button>
-    <button id="hospitalButton">Hospital</button>
-</div>
-<ul id="symptom-list"></ul>
+    <h1>Risk Factor</h1>
+    <h2 id="Day">Day 1</h2>
+    <h2 id="Person">Loading person...</h2>
+    <h2 id="status" style="display:none;"></h2>
+    <p id="score">Score: 0</p>
+    <ul id="symptom-list"></ul>
 
-<script>
+    <script>
 
-let symptoms = [];
-let PersonNumber = 0;
-let score = 0;
-let day = 1;
+        function scale() {
+            const s = Math.min(window.innerWidth / 4096, window.innerHeight / 3277);
+            const x = (window.innerWidth - 4096 * s) / 2;
+            const y = (window.innerHeight - 3277 * s) / 2;
+            document.querySelector('.frame-1').style.transform = `translate(${x}px, ${y}px) scale(${s})`;
+        }
+        scale();
+        window.addEventListener('resize', scale);
 
-const dayElement = document.getElementById("Day");
-const person = document.getElementById("Person");
-const scoreElement = document.getElementById("score");
-const statusElement = document.getElementById("status");
-const symptomList = document.getElementById("symptom-list");
-const homeButton = document.getElementById("homeButton");
-const hospitalButton = document.getElementById("hospitalButton");
-
-function CurrentSymptoms() {
-    const currentSymptoms = symptoms[PersonNumber];
-    person.innerText = `Person ${PersonNumber + 1} of ${symptoms.length}`;
-    symptomList.innerHTML = "";
-    for (let i = 1; i < currentSymptoms.length; i++) {
-        const li = document.createElement("li");
-        li.innerText = `${i}. ${currentSymptoms[i]}`;
-        symptomList.appendChild(li);
-    }
-}
-
-function showResult(result) {
-    statusElement.innerText = result;
-    statusElement.style.display = "block";
-    setTimeout(() => {statusElement.style.display = "none";}, 1000);
-}
-
-function loadSymptomsForDay(requestedDay) {
-    day = requestedDay;
-    PersonNumber = 0;
-    score = 0;
-    symptoms = [];
-    dayElement.innerText = `Day ${day}`;
-    scoreElement.innerText = `Score: ${score}`;
-    fetch(`/api/message?day=${day}`)
-        .then(response => response.json())
-        .then(data => {
-            symptoms = data;
-            CurrentSymptoms();
-        })
-        .catch(() => {
-            person.innerText = "Error loading symptoms.";
+        document.querySelector('.patient-file').addEventListener('click', function () {
+            document.querySelector('.symptoms').classList.add('visible');
+            document.querySelector('.exit-symptoms').classList.add('visible');
+            document.getElementById('symptom-list').style.display = 'block';
         });
-}
 
-function handleChoice(choice) {
-    const health = symptoms[PersonNumber][0];
-    if (choice === "Home") {
-        if (health === "Unhealthy") {
-            showResult("Disregarded a Person in Critical Condition!");
-            setTimeout(() => loadSymptomsForDay(1), 1000);
-            return;
+        function closeSymptoms() {
+            document.querySelector('.symptoms').classList.remove('visible');
+            document.querySelector('.exit-symptoms').classList.remove('visible');
+            document.getElementById('symptom-list').style.display = 'none';
         }
-        score += 1;
-    }
-    else if (choice === "Hospital") {
-        if (health === "Healthy") {
-            score -= 2;
-            if (score < 0) score = 0;
-        } else {
-            score += 1;
-        }
-    }
-    dayElement.innerText = `Day ${day}`;
-    scoreElement.innerText = `Score: ${score}`;
-    if (PersonNumber + 1 >= symptoms.length) {
-        if (score >= 7) {
-            showResult("You Saved Everyone!");
-            setTimeout(() => loadSymptomsForDay(day + 1), 1000);
-        }
-        else {
-            showResult("The Hospital Was Overcrowded.");
-            setTimeout(() => loadSymptomsForDay(1), 1000);
-        }
-        return;
-    }
-    PersonNumber += 1;
-    CurrentSymptoms();
-}
-homeButton.addEventListener("click", () => handleChoice("Home"));
-hospitalButton.addEventListener("click", () => handleChoice("Hospital"));
-loadSymptomsForDay(day);
 
-</script>
+        document.querySelector('.exit-symptoms').addEventListener('click', closeSymptoms);
+        document.querySelector('.symptoms').addEventListener('click', closeSymptoms);
+
+
+        const firstNames = ["Shriya", "Alana", "Rebecca", "Maria", "Priya", "Jordan", "Taylor", "Carmen", "Destiny", "Fatima", "Mei", "Aaliyah", "Sofia", "Nadia", "Layla"];
+        const lastNames = ["Rajesh", "Zhao", "Tio", "Johnson", "Williams", "Patel", "Nguyen", "Martinez", "Brown", "Kim", "Okafor", "Hassan", "Rivera", "Chen", "Thompson"];
+        let names = [];
+
+        function randomName() {
+            const first = firstNames[Math.floor(Math.random() * firstNames.length)];
+            const last = lastNames[Math.floor(Math.random() * lastNames.length)];
+            return `${first} ${last}`;
+        }
+
+        let symptoms = [];
+        let PersonNumber = 0;
+        let score = 0;
+        let day = 1;
+
+        const dayElement = document.getElementById("Day");
+        const person = document.getElementById("Person");
+        const scoreElement = document.getElementById("score");
+        const statusElement = document.getElementById("status");
+        const symptomList = document.getElementById("symptom-list");
+        const homeButton = document.getElementById("homeButton");
+        const hospitalButton = document.getElementById("hospitalButton");
+        const badLayer = document.getElementById("badLayer");
+        const goodLayer = document.getElementById("goodLayer");
+
+        function CurrentSymptoms() {
+            const currentSymptoms = symptoms[PersonNumber];
+            person.innerText = names[PersonNumber];
+            symptomList.innerHTML = "";
+            for (let i = 1; i < currentSymptoms.length; i++) {
+                const li = document.createElement("li");
+                li.innerText = `${i}. ${currentSymptoms[i]}`;
+                symptomList.appendChild(li);
+            }
+        }
+
+        function showResult(result) {
+            statusElement.innerText = result;
+            statusElement.style.display = "block";
+            setTimeout(() => { statusElement.style.display = "none"; }, 1000);
+        }
+
+        function DaySymptoms(requestedDay) {
+            day = requestedDay;
+            PersonNumber = 0;
+            score = 0;
+            symptoms = [];
+            dayElement.innerText = `Day ${day}`;
+            scoreElement.innerText = `Score: ${score}`;
+            fetch(`/api/message?day=${day}`)
+                .then(response => response.json())
+                .then(data => {
+                    symptoms = data;
+                    names = symptoms.map(() => randomName());
+                    CurrentSymptoms();
+                })
+                .catch(() => {
+                    person.innerText = "Error loading symptoms.";
+                });
+        }
+
+        function UpdateScore(choice) {
+            const health = symptoms[PersonNumber][0];
+            if (choice === "Home") {
+                if (health === "Unhealthy") {
+                    showResult("Disregarded a Person in Critical Condition!");
+                    setTimeout(() => DaySymptoms(1), 1000);
+                    return;
+                }
+                score += 1;
+            }
+            else if (choice === "Hospital") {
+                if (health === "Healthy") {
+                    score -= 2;
+                    if (score < 0) score = 0;
+                } else {
+                    score += 1;
+                }
+            }
+            dayElement.innerText = `Day ${day}`;
+            scoreElement.innerText = `Score: ${score}`;
+            if (PersonNumber + 1 >= symptoms.length) {
+                if (score > 8) {
+                    showResult("You Saved Everyone!");
+                    setTimeout(() => DaySymptoms(day + 1), 1000);
+                }
+                else {
+                    showResult("The Hospital Was Overcrowded.");
+                    setTimeout(() => DaySymptoms(1), 1000);
+                }
+                return;
+            }
+            PersonNumber += 1;
+            CurrentSymptoms();
+        }
+        homeButton.addEventListener("click", () => UpdateScore("Home"));
+        hospitalButton.addEventListener("click", () => UpdateScore("Hospital"));
+        DaySymptoms(day);
+
+    </script>
 </body>
+
 </html>

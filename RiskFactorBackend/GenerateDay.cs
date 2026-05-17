@@ -4,7 +4,9 @@ public enum Scenario {
     HighPriority,
     RiskFactorMedium,
     ThreeMedium,
-    Healthy
+    Healthy,
+    RiskFactorOnly,
+    FewMedium
 }
 
 public class GenerateDay {
@@ -59,13 +61,22 @@ public class GenerateDay {
         };
     }
 
+    private Scenario PickHealthyScenario(int day) {
+        var options = new List<Scenario> { Scenario.Healthy };
+        if (dayAvails[day][SymptomPriority.MediumPriority] > 0)
+            options.Add(Scenario.FewMedium);
+        if (dayAvails[day][SymptomPriority.RiskFactor] > 0)
+            options.Add(Scenario.RiskFactorOnly);
+        return options[_random.Next(options.Count)];
+    }
+
     public List<List<String>> Symptoms(int day) {
         List<List<String>> people = new();
         int unhealthyCount = _random.Next(5,9);
         int healthyCount = 10 - unhealthyCount;
         for (int i = 0; i < healthyCount; i++) {
             List<String> info = new() { "Healthy" };
-            List<Symptom> symptoms = _bank.PickSymptoms(Scenario.Healthy, dayAvails[day]);
+            List<Symptom> symptoms = _bank.PickSymptoms(PickHealthyScenario(day), dayAvails[day]);
             foreach (var symptom in symptoms) {
                 string dialogue = symptom.DialogueOptions[_random.Next(symptom.DialogueOptions.Length)];
                 info.Add(dialogue);
