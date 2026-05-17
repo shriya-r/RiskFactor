@@ -80,8 +80,10 @@
       height: 621px;
       left: 143px;
       top: 930.5px;
+      cursor: pointer;
     }
 
+    /* Symptoms overlay */
     .symptoms {
       position: absolute;
       width: 3120px;
@@ -101,23 +103,70 @@
       display: none;
     }
 
+    /* Book overlay */
+    .high-priority {
+      position: absolute;
+      width: 1281px;
+      height: 2470px;
+      left: 1416px;
+      top: 354.5px;
+      display: none;
+    }
+
+    .medium-priority {
+      position: absolute;
+      width: 1281px;
+      height: 2470px;
+      left: 2741px;
+      top: 354.5px;
+      display: none;
+    }
+
+    .risk-factor {
+      position: absolute;
+      width: 1281px;
+      height: 2470px;
+      left: 95px;
+      top: 363.5px;
+      display: none;
+    }
+
+    .exit-book {
+      position: absolute;
+      width: 173px;
+      height: 170px;
+      left: 3849px;
+      top: 142.5px;
+      cursor: pointer;
+      display: none;
+      z-index: 999;
+    }
+
     .symptoms.visible,
-    .exit-symptoms.visible {
+    .exit-symptoms.visible,
+    .high-priority.visible,
+    .medium-priority.visible,
+    .risk-factor.visible,
+    .exit-book.visible {
       display: block;
     }
   </style>
 </head>
 <body>
   <div class="frame-1">
-    <img class="background"     src="assets/BACKGROUND.jpg"    alt="" />
-    <img class="tool-box"       src="assets/TOOL_BOX.png"      alt="" />
-    <img class="bad"            src="assets/BAD.png"            alt="" />
-    <img class="good"           src="assets/GOOD.png"           alt="" />
-    <img class="patient-file"   src="assets/PATIENT_FILE.png"   alt="" />
-    <img class="score"          src="assets/SCORE.png"          alt="" />
-    <img class="book-and-plant" src="assets/BOOK_AND_PLANT.png" alt="" />
-    <img class="symptoms"       src="assets/SYMPTOMS.png"       alt="" />
-    <img class="exit-symptoms"  src="assets/EXIT_SYMPTOMS.png"  alt="" />
+    <img class="background"      src="assets/BACKGROUND.jpg"      alt="" />
+    <img class="tool-box"        src="assets/TOOL_BOX.png"        alt="" />
+    <img class="bad"             src="assets/BAD.png"             alt="" />
+    <img class="good"            src="assets/GOOD.png"            alt="" />
+    <img class="patient-file"    src="assets/PATIENT_FILE.png"    alt="" />
+    <img class="score"           src="assets/SCORE.png"           alt="" />
+    <img class="book-and-plant"  src="assets/BOOK_AND_PLANT.png"  alt="" />
+    <img class="symptoms"        src="assets/SYMPTOMS.png"        alt="" />
+    <img class="exit-symptoms"   src="assets/EXIT_SYMPTOMS.png"   alt="" />
+    <img class="high-priority"   src="assets/HIGH_PRIORITY.png"   alt="" />
+    <img class="medium-priority" src="assets/MEDIUM_PRIORITY.png" alt="" />
+    <img class="risk-factor"     src="assets/RISK_FACTOR.png"     alt="" />
+    <img class="exit-book"       src="assets/EXIT_SYMPTOMS.png"   alt="" />
   </div>
 
   <script>
@@ -131,6 +180,7 @@
     scale();
     window.addEventListener('resize', scale);
 
+    // Symptoms
     document.querySelector('.patient-file').addEventListener('click', function () {
       document.querySelector('.symptoms').classList.add('visible');
       document.querySelector('.exit-symptoms').classList.add('visible');
@@ -139,6 +189,21 @@
     document.querySelector('.exit-symptoms').addEventListener('click', function () {
       document.querySelector('.symptoms').classList.remove('visible');
       document.querySelector('.exit-symptoms').classList.remove('visible');
+    });
+
+    // Book panels
+    document.querySelector('.book-and-plant').addEventListener('click', function () {
+      document.querySelector('.high-priority').classList.add('visible');
+      document.querySelector('.medium-priority').classList.add('visible');
+      document.querySelector('.risk-factor').classList.add('visible');
+      document.querySelector('.exit-book').classList.add('visible');
+    });
+
+    document.querySelector('.exit-book').addEventListener('click', function () {
+      document.querySelector('.high-priority').classList.remove('visible');
+      document.querySelector('.medium-priority').classList.remove('visible');
+      document.querySelector('.risk-factor').classList.remove('visible');
+      document.querySelector('.exit-book').classList.remove('visible');
     });
   </script>
 </body>
