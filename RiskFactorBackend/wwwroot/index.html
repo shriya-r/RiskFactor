@@ -107,6 +107,9 @@
             cursor: pointer;
             display: none;
             z-index: 50;
+            background-image: url('assets/EXIT_SYMPTOMS.png');
+            background-size: contain;
+            background-repeat: no-repeat;
         }
 
         .symptoms.visible,
@@ -122,6 +125,7 @@
             color: white;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
             z-index: 30;
+            pointer-events: none;
         }
 
         #homeButton {
@@ -143,6 +147,7 @@
             margin-top: -40px;
             margin-left: 400px;
             width: 500px;
+            pointer-events: none;
         }
 
         #symptom-list li {
@@ -161,7 +166,7 @@
         <img class="score" src="assets/SCORE.png" alt="" />
         <img class="book-and-plant" src="assets/BOOK_AND_PLANT.png" alt="" />
         <img class="symptoms" src="assets/SYMPTOMS.png" alt="" />
-        <img class="exit-symptoms" src="assets/EXIT_SYMPTOMS.png" alt="" />
+        <div class="exit-symptoms"></div>
     </div>
 
     <h1>Risk Factor</h1>
@@ -185,19 +190,28 @@
         document.querySelector('.patient-file').addEventListener('click', function () {
             document.querySelector('.symptoms').classList.add('visible');
             document.querySelector('.exit-symptoms').classList.add('visible');
-        });
-        document.querySelector('.patient-file').addEventListener('click', function () {
-            document.querySelector('.symptoms').classList.add('visible');
-            document.querySelector('.exit-symptoms').classList.add('visible');
             document.getElementById('symptom-list').style.display = 'block';
         });
 
-        document.querySelector('.exit-symptoms').addEventListener('click', function () {
+        function closeSymptoms() {
             document.querySelector('.symptoms').classList.remove('visible');
             document.querySelector('.exit-symptoms').classList.remove('visible');
             document.getElementById('symptom-list').style.display = 'none';
-        });
+        }
 
+        document.querySelector('.exit-symptoms').addEventListener('click', closeSymptoms);
+        document.querySelector('.symptoms').addEventListener('click', closeSymptoms);
+
+
+        const firstNames = ["Shriya", "Alana", "Rebecca", "Maria", "Priya", "Jordan", "Taylor", "Carmen", "Destiny", "Fatima", "Mei", "Aaliyah", "Sofia", "Nadia", "Layla"];
+        const lastNames = ["Rajesh", "Zhao", "Tio", "Johnson", "Williams", "Patel", "Nguyen", "Martinez", "Brown", "Kim", "Okafor", "Hassan", "Rivera", "Chen", "Thompson"];
+        let names = [];
+
+        function randomName() {
+            const first = firstNames[Math.floor(Math.random() * firstNames.length)];
+            const last = lastNames[Math.floor(Math.random() * lastNames.length)];
+            return `${first} ${last}`;
+        }
 
         let symptoms = [];
         let PersonNumber = 0;
@@ -216,7 +230,7 @@
 
         function CurrentSymptoms() {
             const currentSymptoms = symptoms[PersonNumber];
-            person.innerText = `Person ${PersonNumber + 1}`;
+            person.innerText = names[PersonNumber];
             symptomList.innerHTML = "";
             for (let i = 1; i < currentSymptoms.length; i++) {
                 const li = document.createElement("li");
@@ -242,6 +256,7 @@
                 .then(response => response.json())
                 .then(data => {
                     symptoms = data;
+                    names = symptoms.map(() => randomName());
                     CurrentSymptoms();
                 })
                 .catch(() => {
