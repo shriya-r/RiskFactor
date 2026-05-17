@@ -425,7 +425,11 @@
         function CurrentSymptoms() {
             const currentSymptoms = symptoms[PersonNumber];
             person.innerText = names[PersonNumber];
-            document.querySelector('.background').src = randomBackground();
+            var newBackground = randomBackground();
+            while (newBackground === document.querySelector('.background').src) {
+                newBackground = randomBackground();
+            }
+            document.querySelector('.background').src = newBackground;
             symptomList.innerHTML = "";
             for (let i = 1; i < currentSymptoms.length; i++) {
                 const li = document.createElement("li");
