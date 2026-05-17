@@ -10,6 +10,8 @@ public enum Scenario {
 }
 
 public class GenerateDay {
+    public const int PatientsPerDay = 5;
+
     private readonly Random _random = new();
     private readonly SymptomBank _bank;
     private readonly Dictionary<int, Dictionary<SymptomPriority, int>> dayAvails;
@@ -72,8 +74,8 @@ public class GenerateDay {
 
     public List<List<String>> Symptoms(int day) {
         List<List<String>> people = new();
-        int unhealthyCount = _random.Next(5,9);
-        int healthyCount = 10 - unhealthyCount;
+        int unhealthyCount = _random.Next(PatientsPerDay / 2, (int)(PatientsPerDay * 0.9));
+        int healthyCount = PatientsPerDay - unhealthyCount;
         for (int i = 0; i < healthyCount; i++) {
             List<String> info = new() { "Healthy" };
             List<Symptom> symptoms = _bank.PickSymptoms(PickHealthyScenario(day), dayAvails[day]);
@@ -105,6 +107,16 @@ public class GenerateDay {
             people.Add(info);
         }
         return people.OrderBy(_ => _random.Next()).ToList();
+    }
+
+    public Dictionary<string, List<string>> SymptomList(int day) {
+        int d = Math.Clamp(day, 1, dayAvails.Keys.Max());
+        var avails = dayAvails[d];
+        return new Dictionary<string, List<string>> {
+            ["high_priority"]   = _bank.GetRange(SymptomPriority.HighPriority,   0, avails[SymptomPriority.HighPriority])  .Select(s => s.Name).ToList(),
+            ["medium_priority"] = _bank.GetRange(SymptomPriority.MediumPriority, 0, avails[SymptomPriority.MediumPriority]).Select(s => s.Name).ToList(),
+            ["risk_factor"]     = _bank.GetRange(SymptomPriority.RiskFactor,     0, avails[SymptomPriority.RiskFactor])    .Select(s => s.Name).ToList(),
+        };
     }
 
     public string DayInfo(int day) {
@@ -141,4 +153,5 @@ public class GenerateDay {
         info += symptomInfo.Length > 0 ? symptomInfo : "No new information. Let's get to treating!";
         return info;
     }
+
 }

@@ -30,4 +30,13 @@ app.MapGet("/api/dayinfo", (HttpRequest req) => {
     return Results.Text(generateDay.DayInfo(Day));
 });
 
+app.MapGet("/api/symptoms", (HttpRequest req) => {
+    var dayQuery = req.Query["day"].FirstOrDefault();
+    int Day = 1;
+    if (!string.IsNullOrEmpty(dayQuery) && int.TryParse(dayQuery, out var parsedDay)) {
+        Day = parsedDay;
+    }
+    return generateDay.SymptomList(Day);
+});
+
 app.Run();
